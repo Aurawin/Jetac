@@ -32,6 +32,15 @@ public class formMain {
     private JLabel lblCollectionName;
     private JButton button1;
     private JButton button2;
+    JLabel lblCollectionInputName;
+    JTextField txtCollectionInputName;
+    JLabel lblCollectionInputValue;
+    JTextField txtCollectionIputValue;
+
+    public void loadLanguage() {
+
+
+    }
 
     public static void main(String[] args) {
         try {
@@ -68,7 +77,7 @@ public class formMain {
         pnlWelcome = new JPanel();
         pnlWelcome.setLayout(new BorderLayout(0, 0));
         pnlWelcome.setEnabled(true);
-        pnlWelcome.setVisible(true);
+        pnlWelcome.setVisible(false);
         frmMain.add(pnlWelcome, "Welcome");
         pnlWelcomeToolbar = new JPanel();
         pnlWelcomeToolbar.setLayout(new BorderLayout(0, 0));
@@ -133,6 +142,7 @@ public class formMain {
         pnlCollectionButtons = new JPanel();
         pnlCollectionButtons.setLayout(new FlowLayout(FlowLayout.LEFT, 2, 1));
         tbCollection.add(pnlCollectionButtons);
+        pnlCollectionButtons.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), null));
         final JButton button3 = new JButton();
         button3.setText("Back");
         pnlCollectionButtons.add(button3);
@@ -153,12 +163,10 @@ public class formMain {
         pnlCollection.add(pnlCollectionClient, BorderLayout.CENTER);
         pnlCollectionClient.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), null));
         final JPanel panel7 = new JPanel();
-        panel7.setLayout(new GridLayoutManager(1, 4, new Insets(0, 0, 0, 0), -1, -1));
+        panel7.setLayout(new GridLayoutManager(1, 6, new Insets(0, 0, 0, 0), -1, -1));
         pnlCollectionClient.add(panel7, BorderLayout.NORTH);
-        final JTextField textField1 = new JTextField();
-        panel7.add(textField1, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
-        final JTextField textField2 = new JTextField();
-        panel7.add(textField2, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
+        txtCollectionIputValue = new JTextField();
+        panel7.add(txtCollectionIputValue, new GridConstraints(0, 3, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
         button1 = new JButton();
         button1.setIcon(new ImageIcon(getClass().getResource("/icons/default/add_16.png")));
         button1.setIconTextGap(4);
@@ -169,7 +177,7 @@ public class formMain {
         button1.setText("");
         button1.setVerticalAlignment(0);
         button1.setVerticalTextPosition(0);
-        panel7.add(button1, new GridConstraints(0, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        panel7.add(button1, new GridConstraints(0, 4, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         button2 = new JButton();
         button2.setIcon(new ImageIcon(getClass().getResource("/icons/default/delete_16.png")));
         button2.setLabel("");
@@ -179,7 +187,15 @@ public class formMain {
         button2.setRolloverSelectedIcon(new ImageIcon(getClass().getResource("/icons/rollover-pressed/delete_16.png")));
         button2.setSelectedIcon(new ImageIcon(getClass().getResource("/icons/pressed/delete_16.png")));
         button2.setText("");
-        panel7.add(button2, new GridConstraints(0, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        panel7.add(button2, new GridConstraints(0, 5, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        lblCollectionInputName = new JLabel();
+        lblCollectionInputName.setText("Name");
+        panel7.add(lblCollectionInputName, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        txtCollectionInputName = new JTextField();
+        panel7.add(txtCollectionInputName, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
+        lblCollectionInputValue = new JLabel();
+        lblCollectionInputValue.setText("Value");
+        panel7.add(lblCollectionInputValue, new GridConstraints(0, 2, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         sbCollection = new JPanel();
         sbCollection.setLayout(new FlowLayout(FlowLayout.LEFT, 1, 1));
         pnlCollection.add(sbCollection, BorderLayout.SOUTH);
