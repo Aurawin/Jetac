@@ -1,157 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="formMain">
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="com.aurawin.jetac.formMain">
   <grid id="27dc6" binding="frmMain" layout-manager="CardLayout" hgap="0" vgap="0" show="a0c17">
     <constraints>
-      <xy x="20" y="20" width="566" height="400"/>
+      <xy x="20" y="20" width="566" height="506"/>
     </constraints>
     <properties/>
     <border type="none"/>
     <children>
-      <grid id="18480" binding="pnlWelcome" layout-manager="BorderLayout" hgap="0" vgap="0">
-        <constraints>
-          <card name="Welcome"/>
-        </constraints>
-        <properties>
-          <enabled value="true"/>
-          <visible value="false"/>
-        </properties>
-        <border type="none"/>
-        <children>
-          <grid id="da438" binding="pnlWelcomeToolbar" layout-manager="BorderLayout" hgap="0" vgap="0">
-            <constraints border-constraint="North"/>
-            <properties/>
-            <border type="none"/>
-            <children>
-              <toolbar id="b81a6" binding="tbWelcome">
-                <constraints border-constraint="Center"/>
-                <properties>
-                  <borderPainted value="true"/>
-                  <floatable value="false"/>
-                </properties>
-                <border type="none"/>
-                <children>
-                  <grid id="7ade0" binding="pnlWelcomeToolbarButtons" layout-manager="FlowLayout" hgap="2" vgap="1" flow-align="0">
-                    <constraints/>
-                    <properties/>
-                    <border type="etched">
-                      <font/>
-                      <title-color color="-4473925"/>
-                    </border>
-                    <children>
-                      <component id="433e6" class="javax.swing.JButton" binding="newButton" default-binding="true">
-                        <constraints/>
-                        <properties>
-                          <text value="New"/>
-                        </properties>
-                      </component>
-                      <component id="a443d" class="javax.swing.JButton" binding="validateButton" default-binding="true">
-                        <constraints/>
-                        <properties>
-                          <text value="Validate"/>
-                        </properties>
-                      </component>
-                    </children>
-                  </grid>
-                </children>
-              </toolbar>
-            </children>
-          </grid>
-          <grid id="40452" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-            <margin top="0" left="0" bottom="0" right="0"/>
-            <constraints border-constraint="Center"/>
-            <properties/>
-            <border type="etched"/>
-            <children>
-              <tabbedpane id="84df0" binding="tpEditors">
-                <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
-                    <preferred-size width="100" height="200"/>
-                  </grid>
-                </constraints>
-                <properties/>
-                <border type="none"/>
-                <children>
-                  <grid id="c8ead" binding="pnlDefault" layout-manager="BorderLayout" hgap="0" vgap="0">
-                    <constraints>
-                      <tabbedpane title="Untitled"/>
-                    </constraints>
-                    <properties/>
-                    <border type="none"/>
-                    <children>
-                      <grid id="552f7" layout-manager="GridLayoutManager" row-count="1" column-count="4" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-                        <margin top="0" left="0" bottom="0" right="0"/>
-                        <constraints border-constraint="North"/>
-                        <properties/>
-                        <border type="none">
-                          <font/>
-                          <title-color color="-4473925"/>
-                        </border>
-                        <children>
-                          <component id="31c41" class="javax.swing.JTextField" binding="txtName">
-                            <constraints>
-                              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-                                <preferred-size width="150" height="-1"/>
-                              </grid>
-                            </constraints>
-                            <properties/>
-                          </component>
-                          <component id="e6f99" class="javax.swing.JTextField" binding="txtValue">
-                            <constraints>
-                              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-                                <preferred-size width="150" height="-1"/>
-                              </grid>
-                            </constraints>
-                            <properties/>
-                          </component>
-                          <grid id="89a7b" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-                            <margin top="0" left="0" bottom="0" right="0"/>
-                            <constraints>
-                              <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-                            </constraints>
-                            <properties/>
-                            <border type="none"/>
-                            <children/>
-                          </grid>
-                          <grid id="aaedf" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-                            <margin top="0" left="0" bottom="0" right="0"/>
-                            <constraints>
-                              <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-                            </constraints>
-                            <properties/>
-                            <border type="none"/>
-                            <children/>
-                          </grid>
-                        </children>
-                      </grid>
-                    </children>
-                  </grid>
-                </children>
-              </tabbedpane>
-            </children>
-          </grid>
-          <grid id="afa62" binding="sbWelcome" layout-manager="FlowLayout" hgap="1" vgap="1" flow-align="0">
-            <constraints border-constraint="South"/>
-            <properties/>
-            <border type="etched"/>
-            <children>
-              <grid id="fe7e8" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-                <margin top="0" left="0" bottom="0" right="0"/>
-                <constraints/>
-                <properties/>
-                <border type="etched"/>
-                <children/>
-              </grid>
-              <grid id="b41a" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-                <margin top="0" left="0" bottom="0" right="0"/>
-                <constraints/>
-                <properties/>
-                <border type="etched"/>
-                <children/>
-              </grid>
-            </children>
-          </grid>
-        </children>
-      </grid>
       <grid id="a0c17" binding="pnlCollection" layout-manager="BorderLayout" hgap="0" vgap="0">
         <constraints>
           <card name="Collection"/>
@@ -179,10 +34,30 @@
                     <properties/>
                     <border type="etched"/>
                     <children>
-                      <component id="68d64" class="javax.swing.JButton" default-binding="true">
+                      <component id="6ee0" class="javax.swing.JButton" binding="btnCollectionNew">
                         <constraints/>
                         <properties>
-                          <text value="Back"/>
+                          <icon value="icons/default/new_16.png"/>
+                          <iconTextGap value="4"/>
+                          <pressedIcon value="icons/pressed/new_16.png"/>
+                          <rolloverIcon value="icons/rollover/new_16.png"/>
+                          <rolloverSelectedIcon value="icons/rollover-pressed/new_16.png"/>
+                          <selectedIcon value="icons/pressed/new_16.png"/>
+                          <text value=""/>
+                          <verticalAlignment value="0"/>
+                          <verticalTextPosition value="0"/>
+                        </properties>
+                      </component>
+                      <component id="65564" class="javax.swing.JButton" default-binding="true">
+                        <constraints/>
+                        <properties>
+                          <text value=""/>
+                        </properties>
+                      </component>
+                      <component id="78788" class="javax.swing.JButton" default-binding="true">
+                        <constraints/>
+                        <properties>
+                          <text value="Validate"/>
                         </properties>
                       </component>
                       <hspacer id="fa11a">
@@ -211,105 +86,191 @@
               </toolbar>
             </children>
           </grid>
-          <grid id="f81fe" binding="pnlCollectionClient" layout-manager="BorderLayout" hgap="0" vgap="0">
-            <constraints border-constraint="Center"/>
+          <grid id="353ff" binding="sbCollection" layout-manager="BorderLayout" hgap="0" vgap="0">
+            <constraints border-constraint="South"/>
             <properties/>
             <border type="etched"/>
             <children>
-              <grid id="94f12" layout-manager="GridLayoutManager" row-count="1" column-count="6" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-                <margin top="0" left="0" bottom="0" right="0"/>
-                <constraints border-constraint="North"/>
+              <grid id="15a3" layout-manager="FlowLayout" hgap="2" vgap="2" flow-align="1">
+                <constraints border-constraint="West"/>
                 <properties/>
                 <border type="none"/>
                 <children>
-                  <component id="1c10d" class="javax.swing.JTextField" binding="txtCollectionIputValue">
-                    <constraints>
-                      <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-                        <preferred-size width="150" height="-1"/>
-                      </grid>
-                    </constraints>
+                  <grid id="b9052" binding="sbCollectionItemIndex" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                    <margin top="0" left="0" bottom="0" right="0"/>
+                    <constraints/>
                     <properties/>
-                  </component>
-                  <component id="6a366" class="javax.swing.JButton" binding="button1" default-binding="true">
-                    <constraints>
-                      <grid row="0" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-                    </constraints>
-                    <properties>
-                      <icon value="icons/default/add_16.png"/>
-                      <iconTextGap value="4"/>
-                      <pressedIcon value="icons/pressed/add_16.png"/>
-                      <rolloverIcon value="icons/rollover/add_16.png"/>
-                      <rolloverSelectedIcon value="icons/rollover-pressed/add_16.png"/>
-                      <selectedIcon value="icons/pressed/add_16.png"/>
-                      <text value=""/>
-                      <verticalAlignment value="0"/>
-                      <verticalTextPosition value="0"/>
-                    </properties>
-                  </component>
-                  <component id="bd0bf" class="javax.swing.JButton" binding="button2" default-binding="true">
-                    <constraints>
-                      <grid row="0" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-                    </constraints>
-                    <properties>
-                      <icon value="icons/default/delete_16.png"/>
-                      <label value=""/>
-                      <pressedIcon value="icons/pressed/delete_16.png"/>
-                      <rolloverEnabled value="true"/>
-                      <rolloverIcon value="icons/rollover/delete_16.png"/>
-                      <rolloverSelectedIcon value="icons/rollover-pressed/delete_16.png"/>
-                      <selectedIcon value="icons/pressed/delete_16.png"/>
-                      <text value=""/>
-                    </properties>
-                  </component>
-                  <component id="943f8" class="javax.swing.JLabel" binding="lblCollectionInputName">
+                    <border type="etched"/>
+                    <children>
+                      <component id="9ca39" class="javax.swing.JLabel" binding="lblCollectionItemIndex">
+                        <constraints>
+                          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <text value="Index"/>
+                        </properties>
+                      </component>
+                    </children>
+                  </grid>
+                  <grid id="8f03" binding="sbCollectionItemTotal" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                    <margin top="0" left="0" bottom="0" right="0"/>
+                    <constraints/>
+                    <properties/>
+                    <border type="etched"/>
+                    <children>
+                      <component id="72a8f" class="javax.swing.JLabel" binding="lblCollectionItemTotal">
+                        <constraints>
+                          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <text value="Total"/>
+                        </properties>
+                      </component>
+                    </children>
+                  </grid>
+                </children>
+              </grid>
+              <grid id="b2732" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                <margin top="0" left="0" bottom="0" right="0"/>
+                <constraints border-constraint="Center"/>
+                <properties/>
+                <border type="none"/>
+                <children>
+                  <component id="78a95" class="javax.swing.JLabel" binding="lblCollectionItemStatus">
                     <constraints>
                       <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
-                      <text value="Name"/>
-                    </properties>
-                  </component>
-                  <component id="93318" class="javax.swing.JTextField" binding="txtCollectionInputName">
-                    <constraints>
-                      <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-                        <preferred-size width="150" height="-1"/>
-                      </grid>
-                    </constraints>
-                    <properties/>
-                  </component>
-                  <component id="d3a9b" class="javax.swing.JLabel" binding="lblCollectionInputValue">
-                    <constraints>
-                      <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                    </constraints>
-                    <properties>
-                      <text value="Value"/>
+                      <text value=""/>
                     </properties>
                   </component>
                 </children>
               </grid>
             </children>
           </grid>
-          <grid id="353ff" binding="sbCollection" layout-manager="FlowLayout" hgap="1" vgap="1" flow-align="0">
-            <constraints border-constraint="South"/>
+          <tabbedpane id="ff670" binding="tpPages">
+            <constraints border-constraint="Center"/>
             <properties/>
-            <border type="etched"/>
+            <border type="none"/>
             <children>
-              <grid id="b9052" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-                <margin top="0" left="0" bottom="0" right="0"/>
-                <constraints/>
+              <grid id="c26b3" binding="pnlCollectionUntitled" layout-manager="BorderLayout" hgap="0" vgap="0">
+                <constraints>
+                  <tabbedpane title="Untitled"/>
+                </constraints>
                 <properties/>
-                <border type="etched"/>
-                <children/>
-              </grid>
-              <grid id="15a3" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-                <margin top="0" left="0" bottom="0" right="0"/>
-                <constraints/>
-                <properties/>
-                <border type="etched"/>
-                <children/>
+                <border type="none"/>
+                <children>
+                  <grid id="f81fe" binding="pnlCollectionClient" layout-manager="BorderLayout" hgap="0" vgap="0">
+                    <constraints border-constraint="Center"/>
+                    <properties/>
+                    <border type="etched"/>
+                    <children>
+                      <grid id="94f12" layout-manager="GridLayoutManager" row-count="1" column-count="6" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                        <margin top="0" left="0" bottom="0" right="0"/>
+                        <constraints border-constraint="North"/>
+                        <properties/>
+                        <border type="none"/>
+                        <children>
+                          <component id="6a366" class="javax.swing.JButton" binding="btnCollectionEditorAdd">
+                            <constraints>
+                              <grid row="0" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                            </constraints>
+                            <properties>
+                              <icon value="icons/default/add_16.png"/>
+                              <iconTextGap value="4"/>
+                              <pressedIcon value="icons/pressed/add_16.png"/>
+                              <rolloverIcon value="icons/rollover/add_16.png"/>
+                              <rolloverSelectedIcon value="icons/rollover-pressed/add_16.png"/>
+                              <selectedIcon value="icons/pressed/add_16.png"/>
+                              <text value=""/>
+                              <verticalAlignment value="0"/>
+                              <verticalTextPosition value="0"/>
+                            </properties>
+                          </component>
+                          <component id="bd0bf" class="javax.swing.JButton" binding="btnCollectionEditorDelete">
+                            <constraints>
+                              <grid row="0" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                            </constraints>
+                            <properties>
+                              <icon value="icons/default/delete_16.png"/>
+                              <label value=""/>
+                              <pressedIcon value="icons/pressed/delete_16.png"/>
+                              <rolloverEnabled value="true"/>
+                              <rolloverIcon value="icons/rollover/delete_16.png"/>
+                              <rolloverSelectedIcon value="icons/rollover-pressed/delete_16.png"/>
+                              <selectedIcon value="icons/pressed/delete_16.png"/>
+                              <text value=""/>
+                            </properties>
+                          </component>
+                          <component id="943f8" class="javax.swing.JLabel" binding="lblCollectionInputName">
+                            <constraints>
+                              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                            </constraints>
+                            <properties>
+                              <text value="Name"/>
+                            </properties>
+                          </component>
+                          <component id="93318" class="javax.swing.JTextField" binding="txtCollectionInputName">
+                            <constraints>
+                              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                                <preferred-size width="150" height="-1"/>
+                              </grid>
+                            </constraints>
+                            <properties/>
+                          </component>
+                          <component id="d3a9b" class="javax.swing.JLabel" binding="lblCollectionInputValue">
+                            <constraints>
+                              <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                            </constraints>
+                            <properties>
+                              <text value="Value"/>
+                            </properties>
+                          </component>
+                          <component id="e6b48" class="javax.swing.JComboBox" binding="cbCollectionInputValue">
+                            <constraints>
+                              <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+                            </constraints>
+                            <properties>
+                              <editable value="true"/>
+                            </properties>
+                          </component>
+                        </children>
+                      </grid>
+                      <grid id="c0186" layout-manager="BorderLayout" hgap="0" vgap="0">
+                        <constraints border-constraint="Center"/>
+                        <properties/>
+                        <border type="none"/>
+                        <children>
+                          <scrollpane id="36eb0" binding="spTree">
+                            <constraints border-constraint="Center"/>
+                            <properties/>
+                            <border type="etched"/>
+                            <children>
+                              <component id="ce98d" class="javax.swing.JTree" binding="tvCollection">
+                                <constraints/>
+                                <properties>
+                                  <dropMode value="ON_OR_INSERT"/>
+                                  <enabled value="true"/>
+                                  <focusCycleRoot value="true"/>
+                                  <focusTraversalPolicyProvider value="true"/>
+                                  <invokesStopCellEditing value="true"/>
+                                  <largeModel value="true"/>
+                                  <rootVisible value="true"/>
+                                </properties>
+                                <clientProperties>
+                                  <JTree.lineStyle class="java.lang.String" value="Angled"/>
+                                </clientProperties>
+                              </component>
+                            </children>
+                          </scrollpane>
+                        </children>
+                      </grid>
+                    </children>
+                  </grid>
+                </children>
               </grid>
             </children>
-          </grid>
+          </tabbedpane>
         </children>
       </grid>
     </children>

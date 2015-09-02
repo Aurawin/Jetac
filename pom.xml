@@ -7,6 +7,19 @@
     <groupId>com.aurawin</groupId>
     <artifactId>jetac</artifactId>
     <version>Development</version>
+    <dependencies>
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20080701</version>
+        </dependency>
+        <dependency>
+            <groupId>org.java.net.substance</groupId>
+            <artifactId>substance</artifactId>
+            <version>6.0</version>
+        </dependency>
+    </dependencies>
+    <repositories>
 
-
+    </repositories>
 </project>

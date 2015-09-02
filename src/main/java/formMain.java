@@ -1,60 +1,169 @@
+package com.aurawin.jetac;
+
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.intellij.uiDesigner.core.Spacer;
 
 import javax.swing.*;
-import javax.swing.border.TitledBorder;
+import javax.swing.tree.DefaultTreeModel;
 import java.awt.*;
-import javax.swing.UIManager.*;
-import com.bulenkov.darcula.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Timer;
+import java.util.TimerTask;
+
+import com.aurawin.core.lang.Table;
+import com.aurawin.jetac.collectionTab;
+
+import org.json.JSONObject;
+import org.pushingpixels.substance.api.skin.SubstanceBusinessLookAndFeel;
 
 
 public class formMain {
+
+
+    protected JSONObject jsonEdit;
+    private static boolean Loading;
+    private static formMain mainForm;
+
     private JPanel frmMain;
-    private JPanel pnlWelcome;
-    private JButton newButton;
-    private JButton validateButton;
-    private JTabbedPane tpEditors;
-    private JTextField txtName;
-    private JTextField txtValue;
-    private JPanel pnlDefault;
     private JPanel pnlCollection;
-    private JPanel pnlWelcomeToolbarButtons;
     private JPanel pnlCollectionButtons;
-    private JPanel sbWelcome;
     private JPanel sbCollection;
     private JPanel pnlCollectionClient;
     private JPanel pnlCollectionToolbar;
-    private JPanel pnlWelcomeToolbar;
-    private JToolBar tbWelcome;
     private JToolBar tbCollection;
     private JLabel lblCollectionTitle;
     private JLabel lblCollectionName;
-    private JButton button1;
-    private JButton button2;
+    private JButton btnCollectionEditorAdd;
+    private JButton btnCollectionEditorDelete;
     JLabel lblCollectionInputName;
     JTextField txtCollectionInputName;
     JLabel lblCollectionInputValue;
-    JTextField txtCollectionIputValue;
+    JPanel sbCollectionItemIndex;
+    JLabel lblCollectionItemIndex;
+    JPanel sbCollectionItemTotal;
+    JLabel lblCollectionItemTotal;
+    JLabel lblCollectionItemStatus;
+    JComboBox cbCollectionInputValue;
+    JButton btnCollectionNew;
+    JScrollPane spTree;
+    JTree tvCollection;
+    public JPanel pnlCollectionUntitled;
+    JTabbedPane tpPages;
 
-    public void loadLanguage() {
+    public formMain() {
+        btnCollectionEditorAdd.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
 
+                //mainForm.lblCollectionEditorItemCount.setText();
+
+            }
+        });
+        btnCollectionEditorDelete.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+
+                //mainForm.lblCollectionEditorItemCount.setText();
+
+            }
+        });
+        cbCollectionInputValue.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                adjustCollectionLabels();
+
+//                SwingUtilities.invokeLater(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                    }
+//                });
+
+            }
+        });
+        btnCollectionNew.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                collectionTab tab = new collectionTab(mainForm.tpPages);
+            }
+        });
+    }
+
+    public void adjustCollectionLabels() {
+        switch (mainForm.cbCollectionInputValue.getSelectedIndex()) {
+            case (0):
+                cbCollectionInputValue.setEditable(false);
+                txtCollectionInputName.setEnabled(true);
+                break;
+            case (1):
+                cbCollectionInputValue.setEditable(false);
+                txtCollectionInputName.setEnabled(false);
+                break;
+            case (2):
+                txtCollectionInputName.setEnabled(true);
+                cbCollectionInputValue.setEditable(true);
+                txtCollectionInputName.setText("");
+                Timer tmr = new Timer();
+                TimerTask tt = new TimerTask() {
+                    public void run() {
+                        mainForm.clearCollectionCombo();
+                        Loading = false;
+                    }
+                };
+                tmr.schedule(tt, 250);
+                break;
+        }
 
     }
 
+    public void clearCollectionCombo() {
+        cbCollectionInputValue.getEditor().setItem("");
+    }
+
+    public static void setTheme() {
+        Icon leafIcon = new ImageIcon(Class.class.getResource("/icons/tree/leafO_16.png"));
+        Icon openIcon = new ImageIcon(Class.class.getResource("/icons/tree/nodeO_16.png"));
+        Icon closedIcon = new ImageIcon(Class.class.getResource("/icons/tree/nodeC_16.png"));
+
+        UIManager.put("Tree.leafIcon", leafIcon);
+        UIManager.put("Tree.openIcon", openIcon);
+        UIManager.put("Tree.closedIcon", closedIcon);
+
+    }
+
+    public static void setLanguage() {
+        mainForm.cbCollectionInputValue.removeAllItems();
+        mainForm.cbCollectionInputValue.addItem(Table.String(Table.JSON.Array));
+        mainForm.cbCollectionInputValue.addItem(Table.String(Table.JSON.Object));
+        mainForm.cbCollectionInputValue.addItem(Table.String(Table.JSON.KeyPair));
+        mainForm.cbCollectionInputValue.setSelectedIndex(2);
+        mainForm.lblCollectionInputName.setText(Table.String(Table.Label.Name));
+        mainForm.lblCollectionInputValue.setText(Table.String(Table.Label.Value));
+        mainForm.btnCollectionNew.setToolTipText(Table.Action.Format(Table.Action.AddNew, Table.Item.JSONObject));
+    }
+
     public static void main(String[] args) {
+        //setTheme();
+        Table.Load();// default language
         try {
-            UIManager.setLookAndFeel("com.bulenkov.darcula.DarculaLaf");
+//            UIManager.setLookAndFeel("com.bulenkov.darcula.DarculaLaf");
+            UIManager.setLookAndFeel(new SubstanceBusinessLookAndFeel());
         } catch (Exception e) {
             e.printStackTrace();
         }
+        Loading = true;
         JFrame frame = new JFrame("formMain");
-        formMain mfForm = new formMain();
-        frame.setContentPane(mfForm.frmMain);
+        mainForm = new formMain();
+        DefaultTreeModel model = (DefaultTreeModel) mainForm.tvCollection.getModel();
+        model.setRoot(null);
+
+        frame.setContentPane(mainForm.frmMain);
+
+        setLanguage();
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
+        //setTheme();
         frame.setVisible(true);
+
+        Loading = false;
     }
 
     {
@@ -74,62 +183,6 @@ public class formMain {
     private void $$$setupUI$$$() {
         frmMain = new JPanel();
         frmMain.setLayout(new CardLayout(0, 0));
-        pnlWelcome = new JPanel();
-        pnlWelcome.setLayout(new BorderLayout(0, 0));
-        pnlWelcome.setEnabled(true);
-        pnlWelcome.setVisible(false);
-        frmMain.add(pnlWelcome, "Welcome");
-        pnlWelcomeToolbar = new JPanel();
-        pnlWelcomeToolbar.setLayout(new BorderLayout(0, 0));
-        pnlWelcome.add(pnlWelcomeToolbar, BorderLayout.NORTH);
-        tbWelcome = new JToolBar();
-        tbWelcome.setBorderPainted(true);
-        tbWelcome.setFloatable(false);
-        pnlWelcomeToolbar.add(tbWelcome, BorderLayout.CENTER);
-        pnlWelcomeToolbarButtons = new JPanel();
-        pnlWelcomeToolbarButtons.setLayout(new FlowLayout(FlowLayout.LEFT, 2, 1));
-        tbWelcome.add(pnlWelcomeToolbarButtons);
-        pnlWelcomeToolbarButtons.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), null, TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, new Font(pnlWelcomeToolbarButtons.getFont().getName(), pnlWelcomeToolbarButtons.getFont().getStyle(), pnlWelcomeToolbarButtons.getFont().getSize()), new Color(-4473925)));
-        newButton = new JButton();
-        newButton.setText("New");
-        pnlWelcomeToolbarButtons.add(newButton);
-        validateButton = new JButton();
-        validateButton.setText("Validate");
-        pnlWelcomeToolbarButtons.add(validateButton);
-        final JPanel panel1 = new JPanel();
-        panel1.setLayout(new GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
-        pnlWelcome.add(panel1, BorderLayout.CENTER);
-        panel1.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), null));
-        tpEditors = new JTabbedPane();
-        panel1.add(tpEditors, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, new Dimension(100, 200), null, 0, false));
-        pnlDefault = new JPanel();
-        pnlDefault.setLayout(new BorderLayout(0, 0));
-        tpEditors.addTab("Untitled", pnlDefault);
-        final JPanel panel2 = new JPanel();
-        panel2.setLayout(new GridLayoutManager(1, 4, new Insets(0, 0, 0, 0), -1, -1));
-        pnlDefault.add(panel2, BorderLayout.NORTH);
-        txtName = new JTextField();
-        panel2.add(txtName, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
-        txtValue = new JTextField();
-        panel2.add(txtValue, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
-        final JPanel panel3 = new JPanel();
-        panel3.setLayout(new GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
-        panel2.add(panel3, new GridConstraints(0, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
-        final JPanel panel4 = new JPanel();
-        panel4.setLayout(new GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
-        panel2.add(panel4, new GridConstraints(0, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
-        sbWelcome = new JPanel();
-        sbWelcome.setLayout(new FlowLayout(FlowLayout.LEFT, 1, 1));
-        pnlWelcome.add(sbWelcome, BorderLayout.SOUTH);
-        sbWelcome.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), null));
-        final JPanel panel5 = new JPanel();
-        panel5.setLayout(new GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
-        sbWelcome.add(panel5);
-        panel5.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), null));
-        final JPanel panel6 = new JPanel();
-        panel6.setLayout(new GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
-        sbWelcome.add(panel6);
-        panel6.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), null));
         pnlCollection = new JPanel();
         pnlCollection.setLayout(new BorderLayout(0, 0));
         frmMain.add(pnlCollection, "Collection");
@@ -143,9 +196,23 @@ public class formMain {
         pnlCollectionButtons.setLayout(new FlowLayout(FlowLayout.LEFT, 2, 1));
         tbCollection.add(pnlCollectionButtons);
         pnlCollectionButtons.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), null));
-        final JButton button3 = new JButton();
-        button3.setText("Back");
-        pnlCollectionButtons.add(button3);
+        btnCollectionNew = new JButton();
+        btnCollectionNew.setIcon(new ImageIcon(getClass().getResource("/icons/default/new_16.png")));
+        btnCollectionNew.setIconTextGap(4);
+        btnCollectionNew.setPressedIcon(new ImageIcon(getClass().getResource("/icons/pressed/new_16.png")));
+        btnCollectionNew.setRolloverIcon(new ImageIcon(getClass().getResource("/icons/rollover/new_16.png")));
+        btnCollectionNew.setRolloverSelectedIcon(new ImageIcon(getClass().getResource("/icons/rollover-pressed/new_16.png")));
+        btnCollectionNew.setSelectedIcon(new ImageIcon(getClass().getResource("/icons/pressed/new_16.png")));
+        btnCollectionNew.setText("");
+        btnCollectionNew.setVerticalAlignment(0);
+        btnCollectionNew.setVerticalTextPosition(0);
+        pnlCollectionButtons.add(btnCollectionNew);
+        final JButton button1 = new JButton();
+        button1.setText("");
+        pnlCollectionButtons.add(button1);
+        final JButton button2 = new JButton();
+        button2.setText("Validate");
+        pnlCollectionButtons.add(button2);
         final Spacer spacer1 = new Spacer();
         pnlCollectionButtons.add(spacer1);
         lblCollectionTitle = new JLabel();
@@ -158,56 +225,93 @@ public class formMain {
         lblCollectionName = new JLabel();
         lblCollectionName.setText("");
         pnlCollectionButtons.add(lblCollectionName);
-        pnlCollectionClient = new JPanel();
-        pnlCollectionClient.setLayout(new BorderLayout(0, 0));
-        pnlCollection.add(pnlCollectionClient, BorderLayout.CENTER);
-        pnlCollectionClient.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), null));
-        final JPanel panel7 = new JPanel();
-        panel7.setLayout(new GridLayoutManager(1, 6, new Insets(0, 0, 0, 0), -1, -1));
-        pnlCollectionClient.add(panel7, BorderLayout.NORTH);
-        txtCollectionIputValue = new JTextField();
-        panel7.add(txtCollectionIputValue, new GridConstraints(0, 3, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
-        button1 = new JButton();
-        button1.setIcon(new ImageIcon(getClass().getResource("/icons/default/add_16.png")));
-        button1.setIconTextGap(4);
-        button1.setPressedIcon(new ImageIcon(getClass().getResource("/icons/pressed/add_16.png")));
-        button1.setRolloverIcon(new ImageIcon(getClass().getResource("/icons/rollover/add_16.png")));
-        button1.setRolloverSelectedIcon(new ImageIcon(getClass().getResource("/icons/rollover-pressed/add_16.png")));
-        button1.setSelectedIcon(new ImageIcon(getClass().getResource("/icons/pressed/add_16.png")));
-        button1.setText("");
-        button1.setVerticalAlignment(0);
-        button1.setVerticalTextPosition(0);
-        panel7.add(button1, new GridConstraints(0, 4, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        button2 = new JButton();
-        button2.setIcon(new ImageIcon(getClass().getResource("/icons/default/delete_16.png")));
-        button2.setLabel("");
-        button2.setPressedIcon(new ImageIcon(getClass().getResource("/icons/pressed/delete_16.png")));
-        button2.setRolloverEnabled(true);
-        button2.setRolloverIcon(new ImageIcon(getClass().getResource("/icons/rollover/delete_16.png")));
-        button2.setRolloverSelectedIcon(new ImageIcon(getClass().getResource("/icons/rollover-pressed/delete_16.png")));
-        button2.setSelectedIcon(new ImageIcon(getClass().getResource("/icons/pressed/delete_16.png")));
-        button2.setText("");
-        panel7.add(button2, new GridConstraints(0, 5, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        lblCollectionInputName = new JLabel();
-        lblCollectionInputName.setText("Name");
-        panel7.add(lblCollectionInputName, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        txtCollectionInputName = new JTextField();
-        panel7.add(txtCollectionInputName, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
-        lblCollectionInputValue = new JLabel();
-        lblCollectionInputValue.setText("Value");
-        panel7.add(lblCollectionInputValue, new GridConstraints(0, 2, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         sbCollection = new JPanel();
-        sbCollection.setLayout(new FlowLayout(FlowLayout.LEFT, 1, 1));
+        sbCollection.setLayout(new BorderLayout(0, 0));
         pnlCollection.add(sbCollection, BorderLayout.SOUTH);
         sbCollection.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), null));
-        final JPanel panel8 = new JPanel();
-        panel8.setLayout(new GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
-        sbCollection.add(panel8);
-        panel8.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), null));
-        final JPanel panel9 = new JPanel();
-        panel9.setLayout(new GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
-        sbCollection.add(panel9);
-        panel9.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), null));
+        final JPanel panel1 = new JPanel();
+        panel1.setLayout(new FlowLayout(FlowLayout.CENTER, 2, 2));
+        sbCollection.add(panel1, BorderLayout.WEST);
+        sbCollectionItemIndex = new JPanel();
+        sbCollectionItemIndex.setLayout(new GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
+        panel1.add(sbCollectionItemIndex);
+        sbCollectionItemIndex.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), null));
+        lblCollectionItemIndex = new JLabel();
+        lblCollectionItemIndex.setText("Index");
+        sbCollectionItemIndex.add(lblCollectionItemIndex, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        sbCollectionItemTotal = new JPanel();
+        sbCollectionItemTotal.setLayout(new GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
+        panel1.add(sbCollectionItemTotal);
+        sbCollectionItemTotal.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), null));
+        lblCollectionItemTotal = new JLabel();
+        lblCollectionItemTotal.setText("Total");
+        sbCollectionItemTotal.add(lblCollectionItemTotal, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        final JPanel panel2 = new JPanel();
+        panel2.setLayout(new GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
+        sbCollection.add(panel2, BorderLayout.CENTER);
+        lblCollectionItemStatus = new JLabel();
+        lblCollectionItemStatus.setText("");
+        panel2.add(lblCollectionItemStatus, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        tpPages = new JTabbedPane();
+        pnlCollection.add(tpPages, BorderLayout.CENTER);
+        pnlCollectionUntitled = new JPanel();
+        pnlCollectionUntitled.setLayout(new BorderLayout(0, 0));
+        tpPages.addTab("Untitled", pnlCollectionUntitled);
+        pnlCollectionClient = new JPanel();
+        pnlCollectionClient.setLayout(new BorderLayout(0, 0));
+        pnlCollectionUntitled.add(pnlCollectionClient, BorderLayout.CENTER);
+        pnlCollectionClient.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), null));
+        final JPanel panel3 = new JPanel();
+        panel3.setLayout(new GridLayoutManager(1, 6, new Insets(0, 0, 0, 0), -1, -1));
+        pnlCollectionClient.add(panel3, BorderLayout.NORTH);
+        btnCollectionEditorAdd = new JButton();
+        btnCollectionEditorAdd.setIcon(new ImageIcon(getClass().getResource("/icons/default/add_16.png")));
+        btnCollectionEditorAdd.setIconTextGap(4);
+        btnCollectionEditorAdd.setPressedIcon(new ImageIcon(getClass().getResource("/icons/pressed/add_16.png")));
+        btnCollectionEditorAdd.setRolloverIcon(new ImageIcon(getClass().getResource("/icons/rollover/add_16.png")));
+        btnCollectionEditorAdd.setRolloverSelectedIcon(new ImageIcon(getClass().getResource("/icons/rollover-pressed/add_16.png")));
+        btnCollectionEditorAdd.setSelectedIcon(new ImageIcon(getClass().getResource("/icons/pressed/add_16.png")));
+        btnCollectionEditorAdd.setText("");
+        btnCollectionEditorAdd.setVerticalAlignment(0);
+        btnCollectionEditorAdd.setVerticalTextPosition(0);
+        panel3.add(btnCollectionEditorAdd, new GridConstraints(0, 4, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        btnCollectionEditorDelete = new JButton();
+        btnCollectionEditorDelete.setIcon(new ImageIcon(getClass().getResource("/icons/default/delete_16.png")));
+        btnCollectionEditorDelete.setLabel("");
+        btnCollectionEditorDelete.setPressedIcon(new ImageIcon(getClass().getResource("/icons/pressed/delete_16.png")));
+        btnCollectionEditorDelete.setRolloverEnabled(true);
+        btnCollectionEditorDelete.setRolloverIcon(new ImageIcon(getClass().getResource("/icons/rollover/delete_16.png")));
+        btnCollectionEditorDelete.setRolloverSelectedIcon(new ImageIcon(getClass().getResource("/icons/rollover-pressed/delete_16.png")));
+        btnCollectionEditorDelete.setSelectedIcon(new ImageIcon(getClass().getResource("/icons/pressed/delete_16.png")));
+        btnCollectionEditorDelete.setText("");
+        panel3.add(btnCollectionEditorDelete, new GridConstraints(0, 5, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        lblCollectionInputName = new JLabel();
+        lblCollectionInputName.setText("Name");
+        panel3.add(lblCollectionInputName, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        txtCollectionInputName = new JTextField();
+        panel3.add(txtCollectionInputName, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
+        lblCollectionInputValue = new JLabel();
+        lblCollectionInputValue.setText("Value");
+        panel3.add(lblCollectionInputValue, new GridConstraints(0, 2, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        cbCollectionInputValue = new JComboBox();
+        cbCollectionInputValue.setEditable(true);
+        panel3.add(cbCollectionInputValue, new GridConstraints(0, 3, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        final JPanel panel4 = new JPanel();
+        panel4.setLayout(new BorderLayout(0, 0));
+        pnlCollectionClient.add(panel4, BorderLayout.CENTER);
+        spTree = new JScrollPane();
+        panel4.add(spTree, BorderLayout.CENTER);
+        spTree.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), null));
+        tvCollection = new JTree();
+        tvCollection.setDropMode(DropMode.ON_OR_INSERT);
+        tvCollection.setEnabled(true);
+        tvCollection.setFocusCycleRoot(true);
+        tvCollection.setFocusTraversalPolicyProvider(true);
+        tvCollection.setInvokesStopCellEditing(true);
+        tvCollection.setLargeModel(true);
+        tvCollection.setRootVisible(true);
+        tvCollection.putClientProperty("JTree.lineStyle", "Angled");
+        spTree.setViewportView(tvCollection);
     }
 
     /**
