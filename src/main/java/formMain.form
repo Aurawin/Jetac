@@ -169,7 +169,7 @@
                         <margin top="0" left="0" bottom="0" right="0"/>
                         <constraints border-constraint="North"/>
                         <properties/>
-                        <border type="none"/>
+                        <border type="etched"/>
                         <children>
                           <component id="6a366" class="javax.swing.JButton" binding="btnCollectionEditorAdd">
                             <constraints>
@@ -239,7 +239,9 @@
                       <grid id="c0186" layout-manager="BorderLayout" hgap="0" vgap="0">
                         <constraints border-constraint="Center"/>
                         <properties/>
-                        <border type="none"/>
+                        <border type="empty">
+                          <size top="1" left="1" bottom="1" right="1"/>
+                        </border>
                         <children>
                           <scrollpane id="36eb0" binding="spTree">
                             <constraints border-constraint="Center"/>

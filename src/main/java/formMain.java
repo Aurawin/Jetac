@@ -264,6 +264,7 @@ public class formMain {
         final JPanel panel3 = new JPanel();
         panel3.setLayout(new GridLayoutManager(1, 6, new Insets(0, 0, 0, 0), -1, -1));
         pnlCollectionClient.add(panel3, BorderLayout.NORTH);
+        panel3.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), null));
         btnCollectionEditorAdd = new JButton();
         btnCollectionEditorAdd.setIcon(new ImageIcon(getClass().getResource("/icons/default/add_16.png")));
         btnCollectionEditorAdd.setIconTextGap(4);
@@ -299,6 +300,7 @@ public class formMain {
         final JPanel panel4 = new JPanel();
         panel4.setLayout(new BorderLayout(0, 0));
         pnlCollectionClient.add(panel4, BorderLayout.CENTER);
+        panel4.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1), null));
         spTree = new JScrollPane();
         panel4.add(spTree, BorderLayout.CENTER);
         spTree.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), null));
