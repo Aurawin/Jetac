@@ -69,7 +69,6 @@ public class formMain {
 
     public static void main(String[] args) {
         try {
-//            UIManager.setLookAndFeel("com.bulenkov.darcula.DarculaLaf");
             UIManager.setLookAndFeel(new SubstanceBusinessLookAndFeel());
         } catch (Exception e) {
             e.printStackTrace();
