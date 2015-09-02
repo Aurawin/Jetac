@@ -13,7 +13,7 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="darcula" level="project" />
     <orderEntry type="library" name="com" level="project" />
-    <orderEntry type="library" name="core-experimental" level="project" />
+    <orderEntry type="library" name="com.aurawin.core-experimental" level="project" />
     <orderEntry type="library" name="Maven: org.json:json:20080701" level="project" />
     <orderEntry type="library" name="Maven: org.java.net.substance:substance:6.0" level="project" />
     <orderEntry type="library" name="Maven: org.pushing-pixels:trident:1.2" level="project" />
@@ -31,5 +31,20 @@
     <orderEntry type="library" name="Maven: asm:asm-all:2.2.3" level="project" />
     <orderEntry type="library" name="Maven: net.java.dev.laf-plugin:laf-plugin:1.1" level="project" />
     <orderEntry type="library" name="Maven: be.cyberelf.nanoxml:lite:2.2.3" level="project" />
+    <orderEntry type="library" name="Maven: com.intellij:forms_rt:7.0.3" level="project" />
+    <orderEntry type="library" name="Maven: asm:asm-commons:3.0" level="project" />
+    <orderEntry type="library" name="Maven: asm:asm-tree:3.0" level="project" />
+    <orderEntry type="library" name="Maven: asm:asm:3.0" level="project" />
+    <orderEntry type="library" name="Maven: com.jgoodies:forms:1.1-preview" level="project" />
+    <orderEntry type="library" name="Maven: jdom:jdom:1.0" level="project" />
+    <orderEntry type="module-library">
+      <library name="Maven: com.aurawin:core:experimental">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../Core/target/com.aurawin.core-experimental.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
 </module>
