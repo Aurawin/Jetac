@@ -55,6 +55,7 @@ public class pnlCollectionToolbar extends JPanel {
     public pnlCollectionToolbar(pnlCollectionClient aOwner){
         super();
         Owner=aOwner;
+
         setLayout(new GridLayoutManager(1, 6, new Insets(0, 0, 0, 0), -1, -1));
         Owner.add(this, BorderLayout.NORTH);
         setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), null));
@@ -63,11 +64,11 @@ public class pnlCollectionToolbar extends JPanel {
 
 
         lblInputName=new JLabel(Table.String(Table.Label.Name));
-        lblInputName.setBorder(new EmptyBorder(0,5,0,5));
+        lblInputName.setBorder(new EmptyBorder(0, 5, 0, 5));
         add(lblInputName, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
 
         txtInputName=new JTextField();
-        txtInputName.setToolTipText(Table.Hint.Format(Table.Hint.Input,Table.Label.Name));
+        txtInputName.setToolTipText(Table.Hint.Format(Table.Hint.Input, Table.Label.Name));
         txtInputName.setPreferredSize(new Dimension(-1, 20));
         txtInputName.setBorder(BorderFactory.createCompoundBorder(txtInputName.getBorder(), BorderFactory.createEmptyBorder(2, 4, 2, 4)));
         add(txtInputName, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
@@ -94,8 +95,22 @@ public class pnlCollectionToolbar extends JPanel {
         btnAdd.setRolloverIcon(Theme.Image(Theme.Light.Button.Rollover.Add));
         btnAdd.setRolloverSelectedIcon(Theme.Image(Theme.Light.Button.RolloverSelected.Add));
         btnAdd.setSelectedIcon(Theme.Image(Theme.Light.Button.Selected.Add));
-        btnAdd.setToolTipText(Table.Hint.Format(Table.Hint.Add, Table.Action.a,Table.Label.Item));
+        btnAdd.setToolTipText(Table.Hint.Format(Table.Hint.Add, Table.Action.a, Table.Label.Item));
         add(btnAdd, new GridConstraints(0, 4, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+
+        btnAdd.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                switch (Owner.Owner.Toolbar.cbInputValue.getSelectedIndex()){
+                    case 0:
+                        break;
+                    case 1:
+                        break;
+                    default :
+                        Owner.Owner.View.addSimpleEntry(txtInputName.getText(),cbInputValue.getEditor().getItem().toString());
+                        break;
+                }
+            }
+        });
 
 
         btnRemove = new JButton();
@@ -104,7 +119,7 @@ public class pnlCollectionToolbar extends JPanel {
         btnRemove.setRolloverIcon(Theme.Image(Theme.Light.Button.Rollover.Delete));
         btnRemove.setRolloverSelectedIcon(Theme.Image(Theme.Light.Button.RolloverSelected.Delete));
         btnRemove.setSelectedIcon(Theme.Image(Theme.Light.Button.Selected.Delete));
-        btnRemove.setToolTipText(Table.Hint.Format(Table.Hint.Delete, Table.Action.an,Table.Label.Item));
+        btnRemove.setToolTipText(Table.Hint.Format(Table.Hint.Delete, Table.Action.an, Table.Label.Item));
         add(btnRemove, new GridConstraints(0, 5, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
     }
 }

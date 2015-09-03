@@ -30,6 +30,11 @@
             <scope>system</scope>
             <systemPath>${AURAWIN_CORE}/target/com.aurawin.core-experimental.jar</systemPath>
         </dependency>
+        <dependency>
+            <groupId>com.jidesoft</groupId>
+            <artifactId>jide-oss</artifactId>
+            <version>3.6.10</version>
+        </dependency>
     </dependencies>
     <repositories>
 

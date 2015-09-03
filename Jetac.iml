@@ -45,5 +45,6 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="Maven: com.jidesoft:jide-oss:3.6.10" level="project" />
   </component>
 </module>
