@@ -106,7 +106,6 @@ public class pnlCollectionToolbar extends JPanel {
                     case 1:
                         break;
                     default :
-                        Owner.Owner.View.addSimpleEntry(txtInputName.getText(),cbInputValue.getEditor().getItem().toString());
                         break;
                 }
             }

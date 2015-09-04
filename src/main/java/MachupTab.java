@@ -16,7 +16,8 @@ import java.awt.event.ActionListener;
  */
 public class MachupTab {
     private static MachupTab machupTab;
-
+    private static itmObject RuntimeObject;
+    private static itmObjectWrapper RuntimeWrapper;
     JTabbedPane tpPages;
     JPanel pnlSimpleClient;
     JPanel pnlSimpleTools;
@@ -37,7 +38,10 @@ public class MachupTab {
     JPanel tpObject;
     JPanel tpArray;
     JPanel pnlObjectTools;
-    JPanel pnlObjectData;
+    JPanel pnlObjectView;
+    JPanel tpRuntime;
+    JPanel pnlItemClient;
+    JPanel pnlObjectVIewClient;
 
     public static void main(String[] args) {
         try {
@@ -50,10 +54,15 @@ public class MachupTab {
         frame.setContentPane(machupTab.pnlMain);
         frame.setPreferredSize(new Dimension(640, 480));
 
+        RuntimeWrapper = new itmObjectWrapper(machupTab.tpRuntime);
+        RuntimeObject = new itmObject(RuntimeWrapper);
+
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
+
+
     }
 
     public MachupTab() {
@@ -127,41 +136,72 @@ public class MachupTab {
         cbCollectionInputValue.setEditable(true);
         pnlSimpleTools.add(cbCollectionInputValue, new GridConstraints(0, 3, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(100, 28), null, 0, false));
         tpObject = new JPanel();
-        tpObject.setLayout(new GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
+        tpObject.setLayout(new GridBagLayout());
+        tpObject.setAutoscrolls(true);
         tpPages.addTab("Object", tpObject);
+        tpObject.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), null));
+        pnlItemClient = new JPanel();
+        pnlItemClient.setLayout(new GridBagLayout());
+        pnlItemClient.setAlignmentX(0.0f);
+        pnlItemClient.setAlignmentY(0.0f);
+        pnlItemClient.setAutoscrolls(true);
+        pnlItemClient.setMinimumSize(new Dimension(-1, 124));
+        pnlItemClient.setPreferredSize(new Dimension(-1, 132));
+        GridBagConstraints gbc;
+        gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.weightx = 1.0;
+        gbc.weighty = 1.0;
+        gbc.fill = GridBagConstraints.BOTH;
+        tpObject.add(pnlItemClient, gbc);
         pnlObject = new JPanel();
-        pnlObject.setLayout(new GridLayoutManager(1, 2, new Insets(0, 0, 0, 0), -1, -1));
-        tpObject.add(pnlObject, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+        pnlObject.setLayout(new BorderLayout(0, 0));
+        pnlObject.setAlignmentX(0.0f);
+        pnlObject.setPreferredSize(new Dimension(32, 132));
+        gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.weightx = 1.0;
+        gbc.weighty = 1.0;
+        gbc.anchor = GridBagConstraints.NORTH;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        pnlItemClient.add(pnlObject, gbc);
         pnlObjectTools = new JPanel();
         pnlObjectTools.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
         pnlObjectTools.setAlignmentX(0.0f);
         pnlObjectTools.setAlignmentY(0.0f);
-        pnlObject.add(pnlObjectTools, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_VERTICAL, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, new Dimension(40, -1), new Dimension(40, 24), new Dimension(40, -1), 0, false));
+        pnlObjectTools.setMinimumSize(new Dimension(32, 32));
+        pnlObjectTools.setPreferredSize(new Dimension(32, 148));
+        pnlObject.add(pnlObjectTools, BorderLayout.WEST);
         btnState = new JButton();
         btnState.setIcon(new ImageIcon(getClass().getResource("/theme/light/button/default/arrowhead_down_16.png")));
         btnState.setPreferredSize(new Dimension(32, 32));
         btnState.setText("");
         pnlObjectTools.add(btnState);
-        final Spacer spacer1 = new Spacer();
-        pnlObjectTools.add(spacer1);
-        btnAddSimple = new JButton();
-        btnAddSimple.setIcon(new ImageIcon(getClass().getResource("/theme/light/button/default/list_16.png")));
-        btnAddSimple.setPreferredSize(new Dimension(32, 32));
-        btnAddSimple.setText("");
-        pnlObjectTools.add(btnAddSimple);
-        btnAddObject = new JButton();
-        btnAddObject.setIcon(new ImageIcon(getClass().getResource("/theme/light/button/default/insert_row_16.png")));
-        btnAddObject.setPreferredSize(new Dimension(32, 32));
-        btnAddObject.setText("");
-        pnlObjectTools.add(btnAddObject);
         btnAddArray = new JButton();
         btnAddArray.setIcon(new ImageIcon(getClass().getResource("/theme/light/button/default/attribute_16.png")));
         btnAddArray.setPreferredSize(new Dimension(32, 32));
         btnAddArray.setText("");
         pnlObjectTools.add(btnAddArray);
-        pnlObjectData = new JPanel();
-        pnlObjectData.setLayout(new BorderLayout(0, 0));
-        pnlObject.add(pnlObjectData, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+        btnAddObject = new JButton();
+        btnAddObject.setIcon(new ImageIcon(getClass().getResource("/theme/light/button/default/insert_row_16.png")));
+        btnAddObject.setPreferredSize(new Dimension(32, 32));
+        btnAddObject.setText("");
+        pnlObjectTools.add(btnAddObject);
+        btnAddSimple = new JButton();
+        btnAddSimple.setIcon(new ImageIcon(getClass().getResource("/theme/light/button/default/list_16.png")));
+        btnAddSimple.setPreferredSize(new Dimension(32, 32));
+        btnAddSimple.setText("");
+        pnlObjectTools.add(btnAddSimple);
+        pnlObjectView = new JPanel();
+        pnlObjectView.setLayout(new BorderLayout(0, 0));
+        pnlObjectView.setAlignmentX(0.0f);
+        pnlObjectView.setAlignmentY(0.0f);
+        pnlObject.add(pnlObjectView, BorderLayout.CENTER);
+        pnlObjectVIewClient = new JPanel();
+        pnlObjectVIewClient.setLayout(new GridBagLayout());
+        pnlObjectView.add(pnlObjectVIewClient, BorderLayout.CENTER);
         tpArray = new JPanel();
         tpArray.setLayout(new GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
         tpPages.addTab("Array", tpArray);
@@ -178,8 +218,8 @@ public class MachupTab {
         button1.setPreferredSize(new Dimension(32, 32));
         button1.setText("");
         panel1.add(button1);
-        final Spacer spacer2 = new Spacer();
-        panel1.add(spacer2);
+        final Spacer spacer1 = new Spacer();
+        panel1.add(spacer1);
         final JButton button2 = new JButton();
         button2.setIcon(new ImageIcon(getClass().getResource("/theme/light/button/default/list_16.png")));
         button2.setPreferredSize(new Dimension(32, 32));
@@ -198,6 +238,13 @@ public class MachupTab {
         final JPanel panel2 = new JPanel();
         panel2.setLayout(new BorderLayout(0, 0));
         pnlArray.add(panel2, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+        tpRuntime = new JPanel();
+        tpRuntime.setLayout(new GridBagLayout());
+        tpRuntime.setAlignmentX(0.0f);
+        tpRuntime.setAlignmentY(0.0f);
+        tpRuntime.setMinimumSize(new Dimension(-1, -1));
+        tpRuntime.setPreferredSize(new Dimension(-1, -1));
+        tpPages.addTab("Runtime", tpRuntime);
     }
 
     /**

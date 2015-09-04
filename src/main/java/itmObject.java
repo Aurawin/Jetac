@@ -5,17 +5,40 @@ import javax.swing.*;
 import java.awt.*;
 
 public class itmObject extends JPanel {
+    itmState State;
     JPanel Owner;
     itmObjectTools Tools;
-    JPanel Data;
+    itmObjectView  View;
+
+    public void setState(itmState state){
+        Tools.setState(state);
+        View.setState(state);
+        State = state;
+        switch (State){
+            case isCollapsed:
+                setPreferredSize(new Dimension(getWidth(), 38));
+                break;
+            case isExpanded:
+                setPreferredSize(new Dimension(getWidth(), -1));
+
+                break;
+        }
+    }
     public itmObject(JPanel owner) {
         super();
-        Owner=owner;
 
-        setLayout(new GridLayoutManager(1, 2, new Insets(0, 0, 0, 0), -1, -1));
-        Owner.add(this, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+        Owner=owner;
+        State = itmState.isExpanded;
+
+        setLayout(new BorderLayout(0, 0));
+        setAlignmentX(0.0f);
+        setPreferredSize(new Dimension(100, 100));
+
+        Owner.setLayout(new GridLayout(Owner.getComponentCount()+1,1));
+        Owner.add(this);
 
         Tools = new itmObjectTools(this);
-
+        View = new itmObjectView(this);
+        setBackground(new Color(20,20,120));
     }
 }

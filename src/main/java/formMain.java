@@ -32,7 +32,7 @@ public class formMain {
 
     JLabel lblStatus;
     JButton btnCollectionNew;
-    JTree tvCollection;
+
     JTabbedPane tpPages;
     JPanel sbPosition;
     JPanel sbCaption;
@@ -59,6 +59,7 @@ public class formMain {
                 lblCollectionName.setText(tab.Name);
             }
         });
+
     }
 
     public static void setLanguage() {
