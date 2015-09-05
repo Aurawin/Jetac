@@ -63,7 +63,7 @@ public class formMain {
     }
 
     public static void setLanguage() {
-        mainForm.btnCollectionNew.setToolTipText(Table.Format(Table.Hint.Add, Table.Action.a, Table.JSON.Object));
+        mainForm.btnCollectionNew.setToolTipText(Table.Format(Table.Hint.Create, Table.Action.a, Table.JSON.Document));
     }
 
     public static void setCollectionPositionStatus(int current, int total) {

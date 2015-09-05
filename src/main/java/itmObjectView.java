@@ -7,7 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class itmObjectView extends JPanel{
-    JLabel lblHeader;
+    public itmObjectViewHeader Header;
     itmObject Owner;
     itmObjectViewClient Client;
 
@@ -15,13 +15,8 @@ public class itmObjectView extends JPanel{
         super(new MigLayout(migLayout.Object.View.getLoConstraints(migLayout.Debug)));
         Owner =owner;
         Owner.add(this, "growx, growy");
-
-        lblHeader=new JLabel();
-        lblHeader.setText(Table.String(Table.Label.Name));
-        add(lblHeader, "aligny top, gap 0 5, height 30");
-
+        Header=new itmObjectViewHeader(this);
         Client=new itmObjectViewClient(this);
-
     }
     public void setState(itmState state){
         Client.setState(state);

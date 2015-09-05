@@ -40,6 +40,16 @@ public class migLayout {
             public static class Debug {
                 public static String loConstraints = View.loConstraints + tagDebug;
             }
+            public static class Header{
+                public static String loConstraints = "nogrid, novisualpadding, aligny top, flowx, fillx" + noGap+noInsets+hideMode;
+                public static class Debug {
+                    public static String loConstraints = Header.loConstraints + tagDebug;
+                }
+                public static String getLoConstraints(boolean debug){
+                    return (debug==true) ? Header.Debug.loConstraints : loConstraints;
+                }
+            }
+
             public static class Client{
                 public static String loConstraints = "nogrid, novisualpadding, aligny top, flowy, fillx" + noGap+noInsets+hideMode;
                 public static class Debug {

@@ -3,8 +3,9 @@ import com.aurawin.core.lang.Table;
 import javax.swing.*;
 
 public class itmArray extends itmObject{
+    JTextField txtName;
     public itmArray(itmObject owner) {
         super(owner);
-        View.lblHeader.setText(Table.String(Table.JSON.Title)+":"+Table.String(Table.JSON.Array)+"[]");
+        View.Header.lblName.setText(Table.String(Table.JSON.Array) + "[]");
     }
 }

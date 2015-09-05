@@ -40,7 +40,7 @@ public class itmObject extends JPanel {
         Wrapper.add(this, "growx, growy");
         Tools = new itmObjectTools(this,false);
         View = new itmObjectView(this);
-        View.lblHeader.setVisible(false);
+        View.Header.setVisible(false);
     }
     public itmObject(itmObject owner){
         super(new MigLayout(migLayout.Object.getLoConstraints(migLayout.Debug)));
@@ -53,7 +53,7 @@ public class itmObject extends JPanel {
         Owner.View.Client.add(this, "growx, growy");
         Tools = new itmObjectTools(this,true);
         View = new itmObjectView(this);
-        View.lblHeader.setText(Table.String(Table.JSON.Title) + ":" + Table.String(Table.JSON.Object));
+        View.Header.lblName.setText(Table.String(Table.JSON.Object));
     }
     public void Remove(){
         Owner.View.Client.remove(Self);
