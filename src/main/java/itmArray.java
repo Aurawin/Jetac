@@ -7,5 +7,6 @@ public class itmArray extends itmObject{
     public itmArray(itmObject owner) {
         super(owner);
         View.Header.lblName.setText(Table.String(Table.JSON.Array) + "[]");
+        View.Header.txtName.setVisible(true);
     }
 }

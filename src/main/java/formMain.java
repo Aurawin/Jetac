@@ -38,8 +38,6 @@ public class formMain {
     JPanel sbCaption;
     JLabel lblCollectionTitle;
     JLabel lblCollectionName;
-    JButton btnOpen;
-    JButton btnValidate;
     JLabel lblCollectionIndex;
     JLabel lblCollectionTotal;
 
@@ -136,12 +134,6 @@ public class formMain {
         btnCollectionNew.setVerticalAlignment(0);
         btnCollectionNew.setVerticalTextPosition(0);
         pnlToolbarButtons.add(btnCollectionNew);
-        btnOpen = new JButton();
-        btnOpen.setText("");
-        pnlToolbarButtons.add(btnOpen);
-        btnValidate = new JButton();
-        btnValidate.setText("Validate");
-        pnlToolbarButtons.add(btnValidate);
         final Spacer spacer1 = new Spacer();
         pnlToolbarButtons.add(spacer1);
         lblCollectionTitle = new JLabel();

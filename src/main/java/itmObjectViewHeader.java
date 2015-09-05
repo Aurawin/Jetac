@@ -20,6 +20,7 @@ public class itmObjectViewHeader extends JPanel{
 
         txtName = new JTextField();
         add(txtName,"align left, grow");
+        txtName.setVisible(false);
     }
 
 }

@@ -50,18 +50,6 @@
                           <verticalTextPosition value="0"/>
                         </properties>
                       </component>
-                      <component id="65564" class="javax.swing.JButton" binding="btnOpen">
-                        <constraints/>
-                        <properties>
-                          <text value=""/>
-                        </properties>
-                      </component>
-                      <component id="78788" class="javax.swing.JButton" binding="btnValidate">
-                        <constraints/>
-                        <properties>
-                          <text value="Validate"/>
-                        </properties>
-                      </component>
                       <hspacer id="fa11a">
                         <constraints/>
                       </hspacer>
