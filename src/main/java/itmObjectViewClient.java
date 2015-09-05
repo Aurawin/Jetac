@@ -1,9 +1,6 @@
-import com.intellij.uiDesigner.core.GridConstraints;
-import com.intellij.uiDesigner.core.GridLayoutManager;
-
 import net.miginfocom.swing.MigLayout;
-
 import javax.swing.*;
+
 import java.awt.*;
 
 public class itmObjectViewClient extends JPanel {

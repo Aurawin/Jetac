@@ -12,14 +12,14 @@ public class itmObjectViewHeader extends JPanel{
     public itmObjectViewHeader(itmObjectView owner){
         super(new MigLayout(migLayout.Object.View.Header.getLoConstraints(migLayout.Debug)));
         Owner=owner;
-        Owner.add(this, "growx, growy, height 22");
+        Owner.add(this, "gaptop 2, growx, growy, gapbottom 2");
 
         lblName = new JLabel();
         lblName.setText(Table.String(Table.Label.Name));
         add(lblName, "align label, gap 0 5");
 
         txtName = new JTextField();
-        add(txtName,"align left, grow");
+        add(txtName,"align left, grow, height 28");
         txtName.setVisible(false);
     }
 

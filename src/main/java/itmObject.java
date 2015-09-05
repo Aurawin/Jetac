@@ -9,6 +9,7 @@ import java.beans.Transient;
 
 public class itmObject extends JPanel {
     itmState State;
+    itmKind Kind;
     itmWrapper Wrapper;
     itmObject Owner;
     itmObject Self;
@@ -36,6 +37,7 @@ public class itmObject extends JPanel {
         Owner=null;
         Wrapper=wrapper;
         State = itmState.isExpanded;
+        Kind = itmKind.ikObject;
         setBorder(BorderFactory.createEtchedBorder());
         Wrapper.add(this, "growx, growy");
         Tools = new itmObjectTools(this,false);

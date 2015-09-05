@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 
 public class itmSimple extends JPanel {
     itmObject Owner;
+    itmKind Kind;
     JLabel lblName;
     JTextField txtName;
     JLabel lblValue;
@@ -26,14 +27,14 @@ public class itmSimple extends JPanel {
         Self=this;
         Owner = owner;
         Owner.View.Client.add(this, "grow, gaptop 0");
-
+        Kind = itmKind.ikSimple;
 
         lblName = new JLabel();
         lblName.setText(Table.String(Table.Label.Name));
         add(lblName,"align label, gap 0 5");
 
         txtName = new JTextField();
-        add(txtName,"align left, grow, width max(10%,20%)");
+        add(txtName,"align left, grow, height 28, width max(10%,20%)");
 
         lblValue = new JLabel();
         lblValue.setText(Table.String(Table.Label.Value));
@@ -41,7 +42,7 @@ public class itmSimple extends JPanel {
 
         txtValue = new JTextField();
         txtValue.setEditable(true);
-        add(txtValue,"align left, push, grow, width 100:100");
+        add(txtValue,"align left, height 28, push, grow, width 100:100");
 
         btnDelete = new JButton();
         btnDelete.setText("");

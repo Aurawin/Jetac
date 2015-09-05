@@ -8,5 +8,6 @@ public class itmArray extends itmObject{
         super(owner);
         View.Header.lblName.setText(Table.String(Table.JSON.Array) + "[]");
         View.Header.txtName.setVisible(true);
+        Kind = itmKind.ikArray;
     }
 }
