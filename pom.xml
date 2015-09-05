@@ -31,9 +31,14 @@
             <systemPath>${AURAWIN_CORE}/target/com.aurawin.core-experimental.jar</systemPath>
         </dependency>
         <dependency>
-            <groupId>com.jidesoft</groupId>
-            <artifactId>jide-oss</artifactId>
-            <version>3.6.10</version>
+            <groupId>com.miglayout</groupId>
+            <artifactId>miglayout-swing</artifactId>
+            <version>5.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.miglayout</groupId>
+            <artifactId>miglayout-core</artifactId>
+            <version>5.0</version>
         </dependency>
     </dependencies>
     <repositories>

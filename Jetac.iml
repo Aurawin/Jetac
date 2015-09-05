@@ -13,6 +13,8 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="com" level="project" />
     <orderEntry type="library" name="com.aurawin.core-experimental" level="project" />
+    <orderEntry type="library" name="com.miglayout:miglayout-core:5.0" level="project" />
+    <orderEntry type="library" name="com.miglayout:miglayout-swing:5.0" level="project" />
     <orderEntry type="library" name="Maven: org.json:json:20080701" level="project" />
     <orderEntry type="library" name="Maven: org.java.net.substance:substance:6.0" level="project" />
     <orderEntry type="library" name="Maven: org.pushing-pixels:trident:1.2" level="project" />
@@ -45,6 +47,7 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="library" name="Maven: com.jidesoft:jide-oss:3.6.10" level="project" />
+    <orderEntry type="library" name="Maven: com.miglayout:miglayout-swing:5.0" level="project" />
+    <orderEntry type="library" name="Maven: com.miglayout:miglayout-core:5.0" level="project" />
   </component>
 </module>
