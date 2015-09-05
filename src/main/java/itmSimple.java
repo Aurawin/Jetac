@@ -2,13 +2,15 @@ import com.aurawin.core.lang.Table;
 import com.aurawin.core.theme.Theme;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
+import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class itmSimple extends JPanel {
-    JPanel Owner;
-
+    itmObject Owner;
     JLabel lblName;
     JTextField txtName;
     JLabel lblValue;
@@ -16,41 +18,48 @@ public class itmSimple extends JPanel {
 
     JButton btnAdd;
     JButton btnDelete;
+    itmSimple Self;
 
 
-
-    public itmSimple(JPanel owner) {
-        super();
+    public itmSimple(itmObject owner) {
+        super(new MigLayout(migLayout.Object.Item.Simple.getLoConstraints(migLayout.Debug)));
+        Self=this;
         Owner = owner;
-        setBorder(BorderFactory.createEmptyBorder());
-        setLayout(new GridLayoutManager(1, 6, new Insets(0, 0, 0, 0), -1, -1));
-        Owner.add(this, BorderLayout.NORTH);
+        Owner.View.Client.add(this, "grow, gaptop 0");
+
 
         lblName = new JLabel();
         lblName.setText(Table.String(Table.Label.Name));
-        add(lblName, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        add(lblName,"align label, gap 0 5");
+
         txtName = new JTextField();
-        add(txtName, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, new Dimension(-1, 28), new Dimension(100, 28), null, 0, false));
+        add(txtName,"align left, grow, width max(10%,20%)");
 
         lblValue = new JLabel();
         lblValue.setText(Table.String(Table.Label.Value));
-        add(lblValue, new GridConstraints(0, 2, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        add(lblValue,"align label, gap 5 5");
 
         txtValue = new JTextField();
         txtValue.setEditable(true);
-        add(txtValue, new GridConstraints(0, 3, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(100, 28), null, 0, false));
+        add(txtValue,"align left, push, grow, width 100:100");
 
-        btnAdd = new JButton();
-        btnAdd.setText("");
-        btnAdd.setIconTextGap(0);
-        btnAdd.setIcon(Theme.Image(Theme.Light.Button.Default.Add));
-        btnAdd.setPressedIcon(Theme.Image(Theme.Light.Button.Pressed.Add));
-        btnAdd.setRolloverIcon(Theme.Image(Theme.Light.Button.Rollover.Add));
-        btnAdd.setRolloverSelectedIcon(Theme.Image(Theme.Light.Button.RolloverSelected.Add));
-        btnAdd.setSelectedIcon(Theme.Image(Theme.Light.Button.Selected.Add));
-        btnAdd.setVerticalAlignment(0);
-        btnAdd.setVerticalTextPosition(0);
-        add(btnAdd, new GridConstraints(0, 4, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        btnDelete = new JButton();
+        btnDelete.setText("");
+        btnDelete.setIconTextGap(0);
+        btnDelete.setIcon(Theme.Image(Theme.Light.Button.Default.Delete));
+        btnDelete.setPressedIcon(Theme.Image(Theme.Light.Button.Pressed.Delete));
+        btnDelete.setRolloverIcon(Theme.Image(Theme.Light.Button.Rollover.Delete));
+        btnDelete.setRolloverSelectedIcon(Theme.Image(Theme.Light.Button.RolloverSelected.Delete));
+        btnDelete.setSelectedIcon(Theme.Image(Theme.Light.Button.Selected.Delete));
+        btnDelete.setVerticalAlignment(0);
+        btnDelete.setVerticalTextPosition(0);
+        btnDelete.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                Owner.Remove(Self);
+            }
+        });
+
+        add(btnDelete,"align left, width 30");
     }
 }
 

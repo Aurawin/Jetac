@@ -17,7 +17,7 @@ import java.awt.event.ActionListener;
 public class MachupTab {
     private static MachupTab machupTab;
     private static itmObject RuntimeObject;
-    private static itmObjectWrapper RuntimeWrapper;
+
     JTabbedPane tpPages;
     JPanel pnlSimpleClient;
     JPanel pnlSimpleTools;
@@ -42,6 +42,10 @@ public class MachupTab {
     JPanel tpRuntime;
     JPanel pnlItemClient;
     JPanel pnlObjectVIewClient;
+    JScrollPane spRuntime;
+
+
+    itmWrapper pnlWrapper;
 
     public static void main(String[] args) {
         try {
@@ -53,9 +57,10 @@ public class MachupTab {
         machupTab = new MachupTab();
         frame.setContentPane(machupTab.pnlMain);
         frame.setPreferredSize(new Dimension(640, 480));
+        machupTab.tpPages.setSelectedIndex(3);
 
-        RuntimeWrapper = new itmObjectWrapper(machupTab.tpRuntime);
-        RuntimeObject = new itmObject(RuntimeWrapper);
+        machupTab.pnlWrapper = new itmWrapper(machupTab.spRuntime);
+        RuntimeObject = new itmObject(machupTab.pnlWrapper);
 
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -71,6 +76,10 @@ public class MachupTab {
 
             }
         });
+    }
+
+    private void createUIComponents() {
+        // TODO: place custom component creation code here
     }
 
     {
@@ -158,7 +167,7 @@ public class MachupTab {
         pnlObject = new JPanel();
         pnlObject.setLayout(new BorderLayout(0, 0));
         pnlObject.setAlignmentX(0.0f);
-        pnlObject.setPreferredSize(new Dimension(32, 132));
+        pnlObject.setPreferredSize(new Dimension(0, 132));
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 0;
@@ -239,12 +248,17 @@ public class MachupTab {
         panel2.setLayout(new BorderLayout(0, 0));
         pnlArray.add(panel2, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         tpRuntime = new JPanel();
-        tpRuntime.setLayout(new GridBagLayout());
-        tpRuntime.setAlignmentX(0.0f);
-        tpRuntime.setAlignmentY(0.0f);
+        tpRuntime.setLayout(new BorderLayout(0, 0));
+        tpRuntime.setAlignmentX(0.5f);
+        tpRuntime.setAlignmentY(0.5f);
+        tpRuntime.setAutoscrolls(false);
         tpRuntime.setMinimumSize(new Dimension(-1, -1));
         tpRuntime.setPreferredSize(new Dimension(-1, -1));
+        tpRuntime.setToolTipText("Testing 1234");
         tpPages.addTab("Runtime", tpRuntime);
+        spRuntime = new JScrollPane();
+        spRuntime.setHorizontalScrollBarPolicy(31);
+        tpRuntime.add(spRuntime, BorderLayout.CENTER);
     }
 
     /**

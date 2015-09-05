@@ -63,7 +63,7 @@ public class formMain {
     }
 
     public static void setLanguage() {
-        mainForm.btnCollectionNew.setToolTipText(Table.Hint.Format(Table.Hint.Add, Table.Action.a, Table.Item.JSONObject));
+        mainForm.btnCollectionNew.setToolTipText(Table.Format(Table.Hint.Add, Table.Action.a, Table.JSON.Object));
     }
 
     public static void setCollectionPositionStatus(int current, int total) {
@@ -86,7 +86,7 @@ public class formMain {
         mainForm = new formMain();
         frame.setContentPane(mainForm.frmMain);
         frame.setPreferredSize(new Dimension(640, 480));
-
+        frame.setTitle("Aurawin Jtac");
         setLanguage();
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

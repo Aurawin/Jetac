@@ -1,14 +1,22 @@
+import com.aurawin.core.lang.Table;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
+import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
 import java.awt.*;
+import java.beans.Transient;
 
 public class itmObject extends JPanel {
     itmState State;
-    JPanel Owner;
+    itmWrapper Wrapper;
+    itmObject Owner;
+    itmObject Self;
     itmObjectTools Tools;
-    itmObjectView  View;
+    itmObjectView View;
+
+    Dimension dimMax = new Dimension(0, 148);
+    Dimension dimMin = new Dimension(0, 50);
 
     public void setState(itmState state){
         Tools.setState(state);
@@ -16,29 +24,43 @@ public class itmObject extends JPanel {
         State = state;
         switch (State){
             case isCollapsed:
-                setPreferredSize(new Dimension(getWidth(), 38));
                 break;
             case isExpanded:
-                setPreferredSize(new Dimension(getWidth(), -1));
-
                 break;
         }
+        Wrapper.updateUI();
     }
-    public itmObject(JPanel owner) {
-        super();
-
-        Owner=owner;
+    public itmObject(itmWrapper wrapper) {
+        super(new MigLayout(migLayout.Object.getLoConstraints(migLayout.Debug)));
+        Self = this;
+        Owner=null;
+        Wrapper=wrapper;
         State = itmState.isExpanded;
-
-        setLayout(new BorderLayout(0, 0));
-        setAlignmentX(0.0f);
-        setPreferredSize(new Dimension(100, 100));
-
-        Owner.setLayout(new GridLayout(Owner.getComponentCount()+1,1));
-        Owner.add(this);
-
-        Tools = new itmObjectTools(this);
+        setBorder(BorderFactory.createEtchedBorder());
+        Wrapper.add(this, "growx, growy");
+        Tools = new itmObjectTools(this,false);
         View = new itmObjectView(this);
-        setBackground(new Color(20,20,120));
+        View.lblHeader.setVisible(false);
+    }
+    public itmObject(itmObject owner){
+        super(new MigLayout(migLayout.Object.getLoConstraints(migLayout.Debug)));
+        Self = this;
+        Owner=owner;
+        Wrapper=owner.Wrapper;
+        State = itmState.isExpanded;
+        setBorder(BorderFactory.createEtchedBorder());
+
+        Owner.View.Client.add(this, "growx, growy");
+        Tools = new itmObjectTools(this,true);
+        View = new itmObjectView(this);
+        View.lblHeader.setText(Table.String(Table.JSON.Title) + ":" + Table.String(Table.JSON.Object));
+    }
+    public void Remove(){
+        Owner.View.Client.remove(Self);
+        Wrapper.updateUI();
+    }
+    public void Remove (itmSimple Child){
+        View.Client.remove(Child);
+        Wrapper.updateUI();
     }
 }

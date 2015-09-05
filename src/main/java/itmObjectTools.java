@@ -1,5 +1,7 @@
+import com.aurawin.core.lang.Table;
 import com.aurawin.core.theme.Theme;
 import com.intellij.uiDesigner.core.GridConstraints;
+import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
 import java.awt.*;
@@ -7,37 +9,31 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class itmObjectTools extends JPanel{
-
-
+    protected Boolean showDelete = false;
+    Dimension defaultSize;
     itmObject Owner;
 
-    JButton btnState;
-    JButton btnAddArray;
-    JButton btnAddObject;
-    JButton btnAddString;
+    protected JButton btnState;
+    protected JButton btnAddArray;
+    protected JButton btnAddObject;
+    protected JButton btnAddString;
+    protected JButton btnDelete;
 
-    public itmObjectTools(itmObject owner) {
-        super();
+    public itmObjectTools(itmObject owner, Boolean ShowDelete) {
+        super(new MigLayout(migLayout.Object.Toolbar.getLoConstraints(migLayout.Debug)));
         Owner=owner;
 
-
-
-
-        setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
-        setAlignmentX(0.0f);
-        setAlignmentY(0.0f);
-        setMinimumSize(new Dimension(32, 32));
-        setPreferredSize(new Dimension(32, 148));
-        Owner.add(this, BorderLayout.WEST);
-
-        setBackground(new Color(255, 255, 0));
+        defaultSize=new Dimension(32,32);
+        showDelete=ShowDelete;
+        Owner.add(this, "aligny top, width :32:");
 
         btnState = new JButton();
         btnState.setIconTextGap(0);
         setStateIcon(itmState.isExpanded);
         btnState.setPreferredSize(new Dimension(32, 32));
         btnState.setText("");
-        add(btnState);
+
+        add(btnState, "flowy, newline, height :32:, width :32:");
 
         btnAddArray = new JButton();
         btnAddArray.setIconTextGap(0);
@@ -48,7 +44,10 @@ public class itmObjectTools extends JPanel{
         btnAddArray.setSelectedIcon(Theme.Image(Theme.Light.Button.Selected.Attribute));
         btnAddArray.setPreferredSize(new Dimension(32, 32));
         btnAddArray.setText("");
-        add(btnAddArray);
+        btnAddArray.setToolTipText(Table.Format(Table.Hint.Add, Table.Action.a, Table.JSON.Array));
+
+        add(btnAddArray, "flowy, newline");
+
 
         btnAddObject = new JButton();
         btnAddObject.setIconTextGap(0);
@@ -59,7 +58,9 @@ public class itmObjectTools extends JPanel{
         btnAddObject.setSelectedIcon(Theme.Image(Theme.Light.Button.Selected.InsertRow));
         btnAddObject.setPreferredSize(new Dimension(32, 32));
         btnAddObject.setText("");
-        add(btnAddObject);
+        btnAddObject.setToolTipText(Table.Format(Table.Hint.Add, Table.Action.a, Table.JSON.Object));
+
+        add(btnAddObject, "flowy, newline");
 
         btnAddString = new JButton();
         btnAddString.setIconTextGap(0);
@@ -70,7 +71,22 @@ public class itmObjectTools extends JPanel{
         btnAddString.setSelectedIcon(Theme.Image(Theme.Light.Button.Selected.List));
         btnAddString.setPreferredSize(new Dimension(32, 32));
         btnAddString.setText("");
-        add(btnAddString);
+        btnAddString.setToolTipText(Table.Format(Table.Hint.Add, Table.Action.a, Table.JSON.KeyPair));
+        add(btnAddString, "flowy, newline");
+
+        btnDelete = new JButton();
+        btnDelete.setVisible(ShowDelete);
+        btnDelete.setIconTextGap(0);
+        btnDelete.setIcon(Theme.Image(Theme.Light.Button.Default.Delete));
+        btnDelete.setPressedIcon(Theme.Image(Theme.Light.Button.Pressed.Delete));
+        btnDelete.setRolloverIcon(Theme.Image(Theme.Light.Button.Rollover.Delete));
+        btnDelete.setRolloverSelectedIcon(Theme.Image(Theme.Light.Button.RolloverSelected.Delete));
+        btnDelete.setSelectedIcon(Theme.Image(Theme.Light.Button.Selected.Delete));
+        btnDelete.setPreferredSize(new Dimension(32, 32));
+        btnDelete.setText("");
+        btnDelete.setToolTipText(Table.Format(Table.Hint.Delete, Table.Action.$this, Table.JSON.Object));
+        add(btnDelete, "flowy, newline");
+
 
         btnState.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -82,6 +98,29 @@ public class itmObjectTools extends JPanel{
                         Owner.setState(itmState.isCollapsed);
                         break;
                 }
+            }
+        });
+        btnAddString.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                itmSimple itm = new itmSimple(Owner);
+                Owner.Wrapper.updateUI();
+            }
+        });
+        btnAddObject.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                itmObject itm = new itmObject(Owner);
+                Owner.Wrapper.updateUI();
+            }
+        });
+        btnAddArray.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                itmArray itm = new itmArray(Owner);
+                Owner.Wrapper.updateUI();
+            }
+        });
+        btnDelete.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                Owner.Remove();
             }
         });
 
@@ -111,16 +150,16 @@ public class itmObjectTools extends JPanel{
                 btnAddArray.setVisible(false);
                 btnAddObject.setVisible(false);
                 btnAddString.setVisible(false);
+                btnDelete.setVisible(false);
                 setStateIcon(state);
-                setPreferredSize(new Dimension(32,32));
-                setSize(32,32);
                 break;
             case isExpanded:
                 btnAddArray.setVisible(true);
                 btnAddObject.setVisible(true);
                 btnAddString.setVisible(true);
+                if (showDelete==true) btnDelete.setVisible(true);
+
                 setStateIcon(state);
-                setPreferredSize(new Dimension(32,148));
                 break;
 
         }
