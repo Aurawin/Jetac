@@ -31,7 +31,7 @@ public class formMain {
     private JToolBar tbCollection;
 
     JLabel lblStatus;
-    JButton btnCollectionNew;
+    JButton btnNewDocument;
 
     JTabbedPane tpPages;
     JPanel sbPosition;
@@ -40,12 +40,14 @@ public class formMain {
     JLabel lblCollectionName;
     JLabel lblCollectionIndex;
     JLabel lblCollectionTotal;
+    JButton btnSave;
 
     public formMain() {
         $$$setupUI$$$();
-        btnCollectionNew.addActionListener(new ActionListener() {
+        btnNewDocument.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 collectionTab tab = new collectionTab(mainForm.tpPages);
+                btnSave.setEnabled(true);
             }
         });
 
@@ -58,10 +60,16 @@ public class formMain {
             }
         });
 
+        btnSave.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                collectionTab ct = (collectionTab) tpPages.getComponentAt(tpPages.getSelectedIndex());
+                ct.saveToFile();
+            }
+        });
     }
 
     public static void setLanguage() {
-        mainForm.btnCollectionNew.setToolTipText(Table.Format(Table.Hint.Create, Table.Action.a, Table.JSON.Document));
+        mainForm.btnNewDocument.setToolTipText(Table.Format(Table.Hint.Create, Table.Action.a, Table.JSON.Document));
     }
 
     public static void setCollectionPositionStatus(int current, int total) {
@@ -123,17 +131,31 @@ public class formMain {
         pnlToolbarButtons.setLayout(new FlowLayout(FlowLayout.LEFT, 2, 1));
         tbCollection.add(pnlToolbarButtons);
         pnlToolbarButtons.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), null));
-        btnCollectionNew = new JButton();
-        btnCollectionNew.setIcon(new ImageIcon(getClass().getResource("/icons/default/new_16.png")));
-        btnCollectionNew.setIconTextGap(4);
-        btnCollectionNew.setPressedIcon(new ImageIcon(getClass().getResource("/icons/pressed/new_16.png")));
-        btnCollectionNew.setRolloverIcon(new ImageIcon(getClass().getResource("/icons/rollover/new_16.png")));
-        btnCollectionNew.setRolloverSelectedIcon(new ImageIcon(getClass().getResource("/icons/rollover-pressed/new_16.png")));
-        btnCollectionNew.setSelectedIcon(new ImageIcon(getClass().getResource("/icons/pressed/new_16.png")));
-        btnCollectionNew.setText("");
-        btnCollectionNew.setVerticalAlignment(0);
-        btnCollectionNew.setVerticalTextPosition(0);
-        pnlToolbarButtons.add(btnCollectionNew);
+        btnNewDocument = new JButton();
+        btnNewDocument.setIcon(new ImageIcon(getClass().getResource("/icons/default/new_16.png")));
+        btnNewDocument.setIconTextGap(4);
+        btnNewDocument.setPressedIcon(new ImageIcon(getClass().getResource("/icons/pressed/new_16.png")));
+        btnNewDocument.setRolloverIcon(new ImageIcon(getClass().getResource("/icons/rollover/new_16.png")));
+        btnNewDocument.setRolloverSelectedIcon(new ImageIcon(getClass().getResource("/icons/rollover-pressed/new_16.png")));
+        btnNewDocument.setSelectedIcon(new ImageIcon(getClass().getResource("/icons/pressed/new_16.png")));
+        btnNewDocument.setText("");
+        btnNewDocument.setVerticalAlignment(0);
+        btnNewDocument.setVerticalTextPosition(0);
+        pnlToolbarButtons.add(btnNewDocument);
+        btnSave = new JButton();
+        btnSave.setDisabledIcon(new ImageIcon(getClass().getResource("/theme/light/button/disabled/file_16.png")));
+        btnSave.setEnabled(false);
+        btnSave.setFocusable(true);
+        btnSave.setIcon(new ImageIcon(getClass().getResource("/theme/light/button/default/file_16.png")));
+        btnSave.setIconTextGap(4);
+        btnSave.setPressedIcon(new ImageIcon(getClass().getResource("/theme/light/button/pressed/file_16.png")));
+        btnSave.setRolloverIcon(new ImageIcon(getClass().getResource("/theme/light/button/rollover/file_16.png")));
+        btnSave.setRolloverSelectedIcon(new ImageIcon(getClass().getResource("/theme/light/button/rollover-selected/file_16.png")));
+        btnSave.setSelectedIcon(new ImageIcon(getClass().getResource("/theme/light/button/pressed/file_16.png")));
+        btnSave.setText("");
+        btnSave.setVerticalAlignment(0);
+        btnSave.setVerticalTextPosition(0);
+        pnlToolbarButtons.add(btnSave);
         final Spacer spacer1 = new Spacer();
         pnlToolbarButtons.add(spacer1);
         lblCollectionTitle = new JLabel();

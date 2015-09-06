@@ -14,7 +14,7 @@ public class itmObjectView extends JPanel{
     public itmObjectView(itmObject owner) {
         super(new MigLayout(migLayout.Object.View.getLoConstraints(migLayout.Debug)));
         Owner =owner;
-        Owner.add(this, "growx, growy");
+        Owner.add(this, "gaptop 0, gapleft 1, growx, growy");
         Header=new itmObjectViewHeader(this);
         Client=new itmObjectViewClient(this);
     }

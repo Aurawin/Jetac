@@ -19,6 +19,12 @@ public class collectionTab extends JPanel {
     public int itemTotal;
     public JSONObject JSON;
 
+    public void saveToFile() {
+        if (Filename.isEmpty()){
+
+        }
+    }
+
     public collectionTab(JTabbedPane aOwner) {
         super(new BorderLayout());
         Owner=aOwner;

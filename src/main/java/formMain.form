@@ -36,7 +36,7 @@
                     <properties/>
                     <border type="etched"/>
                     <children>
-                      <component id="6ee0" class="javax.swing.JButton" binding="btnCollectionNew">
+                      <component id="6ee0" class="javax.swing.JButton" binding="btnNewDocument">
                         <constraints/>
                         <properties>
                           <icon value="icons/default/new_16.png"/>
@@ -45,6 +45,23 @@
                           <rolloverIcon value="icons/rollover/new_16.png"/>
                           <rolloverSelectedIcon value="icons/rollover-pressed/new_16.png"/>
                           <selectedIcon value="icons/pressed/new_16.png"/>
+                          <text value=""/>
+                          <verticalAlignment value="0"/>
+                          <verticalTextPosition value="0"/>
+                        </properties>
+                      </component>
+                      <component id="a3568" class="javax.swing.JButton" binding="btnSave">
+                        <constraints/>
+                        <properties>
+                          <disabledIcon value="theme/light/button/disabled/file_16.png"/>
+                          <enabled value="false"/>
+                          <focusable value="true"/>
+                          <icon value="theme/light/button/default/file_16.png"/>
+                          <iconTextGap value="4"/>
+                          <pressedIcon value="theme/light/button/pressed/file_16.png"/>
+                          <rolloverIcon value="theme/light/button/rollover/file_16.png"/>
+                          <rolloverSelectedIcon value="theme/light/button/rollover-selected/file_16.png"/>
+                          <selectedIcon value="theme/light/button/pressed/file_16.png"/>
                           <text value=""/>
                           <verticalAlignment value="0"/>
                           <verticalTextPosition value="0"/>

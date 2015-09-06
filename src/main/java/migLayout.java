@@ -28,7 +28,7 @@ public class migLayout {
     }
     public static class Object{
         public static String Panel = "nogrid, flowx, fillx";
-        public static String loConstraints = Panel+noGap+noInsets;
+        public static String loConstraints = Panel+noGap+noInsets+hideMode;
         public static class Debug{
             public static String loConstraints = Object.loConstraints+tagDebug;
         }

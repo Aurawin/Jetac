@@ -11,7 +11,7 @@ public class itmObjectViewClient extends JPanel {
         super(new MigLayout(migLayout.Object.View.Client.getLoConstraints(migLayout.Debug)));
         Owner=owner;
         Self=this;
-        Owner.add(this,"newline, push, grow, gap 0 0");
+        Owner.add(this,"gaptop 0, newline, push, grow");
     }
 
     public void setState(itmState state){

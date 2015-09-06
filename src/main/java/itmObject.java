@@ -2,6 +2,7 @@ import com.aurawin.core.lang.Table;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import net.miginfocom.swing.MigLayout;
+import org.json.JSONObject;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,7 +16,6 @@ public class itmObject extends JPanel {
     itmObject Self;
     itmObjectTools Tools;
     itmObjectView View;
-
     Dimension dimMax = new Dimension(0, 148);
     Dimension dimMin = new Dimension(0, 50);
 
@@ -43,6 +43,7 @@ public class itmObject extends JPanel {
         Tools = new itmObjectTools(this,false);
         View = new itmObjectView(this);
         View.Header.setVisible(false);
+
     }
     public itmObject(itmObject owner){
         super(new MigLayout(migLayout.Object.getLoConstraints(migLayout.Debug)));
@@ -51,18 +52,26 @@ public class itmObject extends JPanel {
         Wrapper=owner.Wrapper;
         State = itmState.isExpanded;
         setBorder(BorderFactory.createEtchedBorder());
-
-        Owner.View.Client.add(this, "growx, growy");
+        Owner.View.Client.add(this, "gaptop 0, gapleft 0, growx, growy");
         Tools = new itmObjectTools(this,true);
         View = new itmObjectView(this);
         View.Header.lblName.setText(Table.String(Table.JSON.Object));
+
+        Owner.updateHeader(Owner.View.Client.getComponentCount());
+
     }
     public void Remove(){
+
         Owner.View.Client.remove(Self);
+        Owner.updateHeader(Owner.View.Client.getComponentCount());
         Wrapper.updateUI();
     }
     public void Remove (itmSimple Child){
         View.Client.remove(Child);
+        updateHeader(View.Client.getComponentCount());
         Wrapper.updateUI();
+    }
+    public void updateHeader(int Count){
+       View.Header.lblName.setText(Table.String(Table.JSON.Object)+" {"+Table.Print(Count)+"}");
     }
 }

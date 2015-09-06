@@ -19,7 +19,7 @@ public class itmObjectViewHeader extends JPanel{
         add(lblName, "align label, gap 0 5");
 
         txtName = new JTextField();
-        add(txtName,"align left, grow, height 28");
+        add(txtName,"align left, grow, push, height 28");
         txtName.setVisible(false);
     }
 

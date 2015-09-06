@@ -25,7 +25,7 @@ public class itmObjectTools extends JPanel{
 
         defaultSize=new Dimension(32,32);
         showDelete=ShowDelete;
-        Owner.add(this, "aligny top, width :32:");
+        Owner.add(this, "aligny top");
 
         btnState = new JButton();
         btnState.setIconTextGap(0);
