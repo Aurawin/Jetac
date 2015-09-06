@@ -60,9 +60,14 @@ public class itmSimple extends JPanel {
             }
         });
 
-        add(btnDelete,"align left, width 30");
+        add(btnDelete, "align left, width 30");
 
         Owner.updateHeader(Owner.View.Client.getComponentCount());
+
+        if (Owner instanceof itmArray){
+            lblName.setVisible(false);
+            txtName.setVisible(false);
+        }
     }
 }
 

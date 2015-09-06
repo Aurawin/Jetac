@@ -21,7 +21,7 @@ public class formMain {
 
     protected JSONObject jsonEdit;
     private static boolean Loading;
-    private static formMain mainForm;
+    protected static formMain mainForm;
 
     private JPanel frmMain;
     private JPanel pnlMain;
@@ -29,7 +29,7 @@ public class formMain {
     private JPanel sbStatus;
     private JPanel pnlToolbar;
     private JToolBar tbCollection;
-
+    protected fileDialog Dialog;
     JLabel lblStatus;
     JButton btnNewDocument;
 
@@ -44,6 +44,8 @@ public class formMain {
 
     public formMain() {
         $$$setupUI$$$();
+        Dialog = new fileDialog(fcKind.fcNew);
+
         btnNewDocument.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 collectionTab tab = new collectionTab(mainForm.tpPages);

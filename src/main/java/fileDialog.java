@@ -11,15 +11,8 @@ public class fileDialog extends JFileChooser {
     public fcKind getKind(){
         return Kind;
     }
-    public fileDialog(fcKind kind){
-        super();
-
-        addChoosableFileFilter(new OpenFileFilter("json", Table.String(Table.JSON.Document)));
-        addChoosableFileFilter(new OpenFileFilter("*.*", Table.String(Table.Dialog.Filter.All)));
+    public void setKind(fcKind kind){
         Kind=kind;
-        if (Path.length()>0) {
-            setCurrentDirectory(Path);
-        }
         switch (Kind) {
             case fcNew:
                 setDialogTitle(Table.Format(Table.Dialog.New, Table.Action.a, Table.JSON.Document));
@@ -30,6 +23,19 @@ public class fileDialog extends JFileChooser {
             case fcOpen:
                 setDialogTitle(Table.Format(Table.Dialog.Open, Table.Action.a, Table.JSON.Document));
                 break;
+        }
+
+    }
+    public fileDialog(fcKind kind){
+        super();
+        setAcceptAllFileFilterUsed(true);
+        resetChoosableFileFilters();
+        OpenFileFilter ff=new OpenFileFilter(".json", Table.String(Table.JSON.Document)+" (*.json)");
+        addChoosableFileFilter(ff);
+        setFileFilter(ff);
+        setKind(kind);
+        if (Path.length()>0) {
+            setCurrentDirectory(Path);
         }
 
     }
