@@ -17,7 +17,6 @@ public class itmSimple extends JPanel {
     JLabel lblValue;
     JTextField txtValue;
 
-    JButton btnAdd;
     JButton btnDelete;
     itmSimple Self;
 
@@ -56,7 +55,7 @@ public class itmSimple extends JPanel {
         btnDelete.setVerticalTextPosition(0);
         btnDelete.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                Owner.Remove(Self);
+                Self.Remove();
             }
         });
 
@@ -68,6 +67,24 @@ public class itmSimple extends JPanel {
             lblName.setVisible(false);
             txtName.setVisible(false);
         }
+    }
+    public void Import(String key, String value){
+        txtName.setText(key);
+        txtValue.setText(value);
+    }
+    public void Remove(){
+        Release();
+        Owner.Wrapper.updateUI();
+    }
+    public void Release(){
+        remove(lblName);
+        remove(txtName);
+        remove(lblValue);
+        remove(txtValue);
+        remove(btnDelete);
+
+        Owner.View.Client.remove(this);
+
     }
 }
 

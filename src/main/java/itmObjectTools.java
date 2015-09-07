@@ -13,6 +13,7 @@ public class itmObjectTools extends JPanel{
     Dimension defaultSize;
     itmObject Owner;
 
+
     protected JButton btnState;
     protected JButton btnAddArray;
     protected JButton btnAddObject;
@@ -163,5 +164,14 @@ public class itmObjectTools extends JPanel{
                 break;
 
         }
+    }
+    public void Release(){
+        remove(btnState);
+        remove(btnAddArray);
+        remove(btnAddObject);
+        remove(btnAddString);
+        remove(btnDelete);
+        Owner.remove(this);
+        Owner.Tools=null;
     }
 }

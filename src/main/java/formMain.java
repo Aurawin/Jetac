@@ -1,3 +1,5 @@
+import com.aurawin.core.stream.FileStream;
+import com.aurawin.core.theme.Theme;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.intellij.uiDesigner.core.Spacer;
@@ -9,9 +11,12 @@ import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 import com.aurawin.core.lang.Table;
 
+import com.jidesoft.swing.JidePopupMenu;
+import com.jidesoft.swing.JideSplitButton;
 import org.json.JSONObject;
 import org.pushingpixels.substance.api.skin.SubstanceBusinessLookAndFeel;
 
@@ -31,7 +36,7 @@ public class formMain {
     private JToolBar tbCollection;
     protected fileDialog Dialog;
     JLabel lblStatus;
-    JButton btnNewDocument;
+
 
     JTabbedPane tpPages;
     JPanel sbPosition;
@@ -40,43 +45,25 @@ public class formMain {
     JLabel lblCollectionName;
     JLabel lblCollectionIndex;
     JLabel lblCollectionTotal;
-    JButton btnSave;
+    JideSplitButton btnFile;
+
+    JMenuItem miFileNew;
+    JSeparator spFileSep1;
+    JMenuItem miFileOpen;
+    JMenuItem miFileClose;
+    JSeparator spFileSep2;
+    JMenuItem miFileSave;
+    JMenuItem miFileSaveAs;
 
     public formMain() {
         $$$setupUI$$$();
-        Dialog = new fileDialog(fcKind.fcNew);
-
-        btnNewDocument.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                collectionTab tab = new collectionTab(mainForm.tpPages);
-                btnSave.setEnabled(true);
-            }
-        });
-
-        tpPages.addChangeListener(new ChangeListener() {
-            public void stateChanged(ChangeEvent e) {
-                collectionTab tab = (collectionTab) tpPages.getSelectedComponent();
-                setCollectionPositionStatus(tab.itemIndex, tab.itemTotal);
-                setStatusMessage(tab.Filename);
-                lblCollectionName.setText(tab.Name);
-            }
-        });
-
-        btnSave.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                collectionTab ct = (collectionTab) tpPages.getComponentAt(tpPages.getSelectedIndex());
-                ct.saveToFile();
-            }
-        });
+        createUIComponents();
     }
 
-    public static void setLanguage() {
-        mainForm.btnNewDocument.setToolTipText(Table.Format(Table.Hint.Create, Table.Action.a, Table.JSON.Document));
-    }
 
-    public static void setCollectionPositionStatus(int current, int total) {
-        mainForm.lblCollectionIndex.setText(Table.Print(current));
-        mainForm.lblCollectionTotal.setText(Table.Print(total));
+    public void setCollectionPositionStatus(int current, int total) {
+        lblCollectionIndex.setText(Table.Print(current));
+        lblCollectionTotal.setText(Table.Print(total));
     }
 
     public static void setStatusMessage(String Status) {
@@ -95,17 +82,155 @@ public class formMain {
         frame.setContentPane(mainForm.frmMain);
         frame.setPreferredSize(new Dimension(640, 480));
         frame.setTitle("Aurawin Jtac");
-        setLanguage();
-
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
+
 
         Loading = false;
     }
 
     private void createUIComponents() {
         // TODO: place custom component creation code here
+        Dialog = new fileDialog(fcKind.fcNew);
+        setFileMenuButton();
+        miFileNew = btnFile.add(Table.String(Table.Label.New));
+        miFileNew.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                collectionTab tab = new collectionTab(mainForm.tpPages);
+                miFileSave.setEnabled(true);
+                miFileSaveAs.setEnabled(true);
+                miFileClose.setEnabled(true);
+            }
+        });
+        setFileNewMenuItem(miFileNew);
+        spFileSep1 = new JSeparator(SwingConstants.HORIZONTAL);
+        btnFile.add(spFileSep1);
+
+        miFileOpen = btnFile.add(Table.String(Table.Label.Open));
+        miFileOpen.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                Dialog.setKind(fcKind.fcOpen);
+                int ioR = Dialog.showOpenDialog(mainForm.tpPages);
+                switch (ioR) {
+                    case JFileChooser.APPROVE_OPTION:
+                        File input = mainForm.Dialog.getSelectedFile();
+                        if (input.exists()) {
+                            collectionTab tab = new collectionTab(mainForm.tpPages);
+                            miFileSave.setEnabled(true);
+                            miFileSaveAs.setEnabled(true);
+                            miFileClose.setEnabled(true);
+                            tab.loadFromFile(input);
+                            mainForm.tpPages.setTitleAt(mainForm.tpPages.indexOfComponent(tab), tab.Name);
+                            lblCollectionName.setText(tab.Name);
+                        }
+                        break;
+                }
+            }
+        });
+        setFileOpenMenuItem(miFileOpen);
+        miFileClose = btnFile.add(Table.String(Table.Label.Close));
+        miFileClose.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if (tpPages.getSelectedIndex() > -1) {
+                    collectionTab ct = (collectionTab) tpPages.getComponentAt(tpPages.getSelectedIndex());
+                    // todo
+                    // This file was modified????
+                    ct.Close();
+                    // should free
+                }
+
+                // release tab
+                // should update gui
+                /*miFileSave.setEnabled(false);
+                miFileSaveAs.setEnabled(false);
+                miFileClose.setEnabled(false);*/
+            }
+        });
+        setFileCloseMenuItem(miFileClose);
+
+
+        spFileSep2 = new JSeparator(SwingConstants.HORIZONTAL);
+        btnFile.add(spFileSep2);
+
+        miFileSave = btnFile.add(Table.String(Table.Label.Save));
+        miFileSave.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                collectionTab ct = (tpPages.getSelectedIndex() > -1) ? (collectionTab) tpPages.getComponentAt(tpPages.getSelectedIndex()) : null;
+                ct.saveToFile();
+            }
+        });
+        setFileSaveMenuItem(miFileSave);
+
+        miFileSaveAs = btnFile.add(Table.String(Table.Label.SaveAs));
+        miFileSaveAs.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                collectionTab ct = (tpPages.getSelectedIndex() > -1) ? (collectionTab) tpPages.getComponentAt(tpPages.getSelectedIndex()) : null;
+                ct.saveToFile();
+            }
+        });
+        setFileSaveMenuItem(miFileSaveAs);
+
+
+        tpPages.addChangeListener(new ChangeListener() {
+            public void stateChanged(ChangeEvent e) {
+                collectionTab tab = (tpPages.getSelectedIndex() > -1) ? (collectionTab) tpPages.getComponentAt(tpPages.getSelectedIndex()) : null;
+                if (tab != null) {
+                    setCollectionPositionStatus(tab.itemIndex, tab.itemTotal);
+                    setStatusMessage(tab.Filename);
+                    lblCollectionName.setText(tab.Name);
+                } else {
+                    setFileMenuOptions(true);
+                }
+
+            }
+        });
+    }
+
+    private void setFileMenuOptions(Boolean Closed) {
+        miFileClose.setEnabled(!Closed);
+        miFileSave.setEnabled(!Closed);
+        miFileSaveAs.setEnabled(!Closed);
+        setCollectionPositionStatus(0, 0);
+        setStatusMessage("");
+        lblCollectionName.setText("");
+
+    }
+
+    private void setFileMenuButton() {
+        btnFile.setMaximumSize(new Dimension(40, 24));
+        btnFile.setPreferredSize(new Dimension(40, 24));
+        btnFile.setText(Table.String(Table.Label.File));
+        btnFile.setAlwaysDropdown(true);
+    }
+
+    private void setFileNewMenuItem(JMenuItem mi) {
+        mi.setToolTipText(Table.Format(Table.Hint.Create, Table.Action.a, Table.JSON.Document));
+        mi.setDisabledIcon(Theme.Image(Theme.Light.Button.Disabled.New));
+        mi.setIcon(Theme.Image(Theme.Light.Button.Default.New));
+        mi.setPressedIcon(Theme.Image(Theme.Light.Button.Pressed.New));
+        mi.setRolloverIcon(Theme.Image(Theme.Light.Button.Rollover.New));
+        mi.setRolloverSelectedIcon(Theme.Image(Theme.Light.Button.RolloverSelected.New));
+        mi.setSelectedIcon(Theme.Image(Theme.Light.Button.Selected.New));
+        mi.setEnabled(true);
+    }
+
+    private void setFileSaveMenuItem(JMenuItem mi) {
+        mi.setDisabledIcon(Theme.Image(Theme.Light.Button.Disabled.Download));
+        mi.setIcon(Theme.Image(Theme.Light.Button.Default.Download));
+        mi.setPressedIcon(Theme.Image(Theme.Light.Button.Pressed.Download));
+        mi.setRolloverIcon(Theme.Image(Theme.Light.Button.Rollover.Download));
+        mi.setRolloverSelectedIcon(Theme.Image(Theme.Light.Button.RolloverSelected.Download));
+        mi.setSelectedIcon(Theme.Image(Theme.Light.Button.Selected.Download));
+        mi.setEnabled(false);
+    }
+
+    private void setFileOpenMenuItem(JMenuItem mi) {
+        mi.setEnabled(true);
+    }
+
+    private void setFileCloseMenuItem(JMenuItem mi) {
+        mi.setEnabled(false);
     }
 
     /**
@@ -133,31 +258,11 @@ public class formMain {
         pnlToolbarButtons.setLayout(new FlowLayout(FlowLayout.LEFT, 2, 1));
         tbCollection.add(pnlToolbarButtons);
         pnlToolbarButtons.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), null));
-        btnNewDocument = new JButton();
-        btnNewDocument.setIcon(new ImageIcon(getClass().getResource("/icons/default/new_16.png")));
-        btnNewDocument.setIconTextGap(4);
-        btnNewDocument.setPressedIcon(new ImageIcon(getClass().getResource("/icons/pressed/new_16.png")));
-        btnNewDocument.setRolloverIcon(new ImageIcon(getClass().getResource("/icons/rollover/new_16.png")));
-        btnNewDocument.setRolloverSelectedIcon(new ImageIcon(getClass().getResource("/icons/rollover-pressed/new_16.png")));
-        btnNewDocument.setSelectedIcon(new ImageIcon(getClass().getResource("/icons/pressed/new_16.png")));
-        btnNewDocument.setText("");
-        btnNewDocument.setVerticalAlignment(0);
-        btnNewDocument.setVerticalTextPosition(0);
-        pnlToolbarButtons.add(btnNewDocument);
-        btnSave = new JButton();
-        btnSave.setDisabledIcon(new ImageIcon(getClass().getResource("/theme/light/button/disabled/file_16.png")));
-        btnSave.setEnabled(false);
-        btnSave.setFocusable(true);
-        btnSave.setIcon(new ImageIcon(getClass().getResource("/theme/light/button/default/file_16.png")));
-        btnSave.setIconTextGap(4);
-        btnSave.setPressedIcon(new ImageIcon(getClass().getResource("/theme/light/button/pressed/file_16.png")));
-        btnSave.setRolloverIcon(new ImageIcon(getClass().getResource("/theme/light/button/rollover/file_16.png")));
-        btnSave.setRolloverSelectedIcon(new ImageIcon(getClass().getResource("/theme/light/button/rollover-selected/file_16.png")));
-        btnSave.setSelectedIcon(new ImageIcon(getClass().getResource("/theme/light/button/pressed/file_16.png")));
-        btnSave.setText("");
-        btnSave.setVerticalAlignment(0);
-        btnSave.setVerticalTextPosition(0);
-        pnlToolbarButtons.add(btnSave);
+        btnFile = new JideSplitButton();
+        btnFile.setMaximumSize(new Dimension(50, 22));
+        btnFile.setMinimumSize(new Dimension(50, 22));
+        btnFile.setPreferredSize(new Dimension(50, 22));
+        pnlToolbarButtons.add(btnFile);
         final Spacer spacer1 = new Spacer();
         pnlToolbarButtons.add(spacer1);
         lblCollectionTitle = new JLabel();
@@ -167,6 +272,13 @@ public class formMain {
         pnlToolbarButtons.add(lblCollectionTitle);
         final Spacer spacer2 = new Spacer();
         pnlToolbarButtons.add(spacer2);
+        final JLabel label1 = new JLabel();
+        label1.setHorizontalAlignment(0);
+        label1.setHorizontalTextPosition(0);
+        label1.setText("-");
+        pnlToolbarButtons.add(label1);
+        final Spacer spacer3 = new Spacer();
+        pnlToolbarButtons.add(spacer3);
         lblCollectionName = new JLabel();
         lblCollectionName.setText("");
         pnlToolbarButtons.add(lblCollectionName);

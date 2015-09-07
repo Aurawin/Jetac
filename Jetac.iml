@@ -27,9 +27,6 @@
     <orderEntry type="library" name="Maven: org.khronos:opengl-api:gl1.1-android-2.1_r1" level="project" />
     <orderEntry type="library" name="Maven: xerces:xmlParserAPIs:2.6.2" level="project" />
     <orderEntry type="library" name="Maven: xpp3:xpp3:1.1.4c" level="project" />
-    <orderEntry type="library" name="Maven: net.java.dev.laf-widget:laf-widget:5.0" level="project" />
-    <orderEntry type="library" name="Maven: ant:ant:1.6.5" level="project" />
-    <orderEntry type="library" name="Maven: asm:asm-all:2.2.3" level="project" />
     <orderEntry type="library" name="Maven: net.java.dev.laf-plugin:laf-plugin:1.1" level="project" />
     <orderEntry type="library" name="Maven: be.cyberelf.nanoxml:lite:2.2.3" level="project" />
     <orderEntry type="library" name="Maven: com.intellij:forms_rt:7.0.3" level="project" />
@@ -49,5 +46,9 @@
     </orderEntry>
     <orderEntry type="library" name="Maven: com.miglayout:miglayout-swing:5.0" level="project" />
     <orderEntry type="library" name="Maven: com.miglayout:miglayout-core:5.0" level="project" />
+    <orderEntry type="library" name="Maven: net.java.dev.laf-widget:laf-widget:5.0" level="project" />
+    <orderEntry type="library" name="Maven: ant:ant:1.6.5" level="project" />
+    <orderEntry type="library" name="Maven: asm:asm-all:2.2.3" level="project" />
+    <orderEntry type="library" name="Maven: com.jidesoft:jide-oss:3.6.10" level="project" />
   </component>
 </module>

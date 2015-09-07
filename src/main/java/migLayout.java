@@ -9,7 +9,7 @@ public class migLayout {
     private static String tagDebug = ", debug";
     private static String hideMode = ", hidemode 2";
     public static class Wrapper{
-        public static String loConstraints = "nogrid, fill"+noGap+noInsets;
+        public static String loConstraints = "nogrid, fill"+noGap+noInsets+hideMode;
         public static class Debug {
             public static String loConstraints = Wrapper.loConstraints + tagDebug;
         }
@@ -27,7 +27,7 @@ public class migLayout {
         }
     }
     public static class Object{
-        public static String Panel = "nogrid, flowx, fillx";
+        public static String Panel = "aligny top, nogrid, flowx, fillx";
         public static String loConstraints = Panel+noGap+noInsets+hideMode;
         public static class Debug{
             public static String loConstraints = Object.loConstraints+tagDebug;
@@ -36,7 +36,7 @@ public class migLayout {
             return (debug==true) ? Object.Debug.loConstraints : loConstraints;
         }
         public static class View{
-            public static String loConstraints = "nogrid, aligny top, fillx, flowx" + noGap+noInsets+hideMode;
+            public static String loConstraints = "nogrid, aligny top, filly, flowx" + noGap+noInsets+hideMode;
             public static class Debug {
                 public static String loConstraints = View.loConstraints + tagDebug;
             }

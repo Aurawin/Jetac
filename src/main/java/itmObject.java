@@ -8,6 +8,7 @@ import org.json.JSONObject;
 import javax.swing.*;
 import java.awt.*;
 import java.beans.Transient;
+import java.util.Iterator;
 
 public class itmObject extends JPanel {
     itmState State;
@@ -19,6 +20,7 @@ public class itmObject extends JPanel {
     itmObjectView View;
     Dimension dimMax = new Dimension(0, 148);
     Dimension dimMin = new Dimension(0, 50);
+
 
     public void setState(itmState state) {
         Tools.setState(state);
@@ -54,6 +56,33 @@ public class itmObject extends JPanel {
         }
         return ja;
     }
+    public void Import(String name, JSONObject jo){
+        Iterator it =jo.keys();
+        String key="";
+        String value="";
+        View.Header.txtName.setText(name);
+        while (it.hasNext()){
+            key = (String) it.next();
+            try {
+                Object o = jo.get(key);
+                if (o instanceof JSONObject) {
+                    itmObject itmO = new itmObject(Self);
+                    itmO.Import(key, (JSONObject) o);
+                } else if (o instanceof JSONArray) {
+                    itmArray itmA = new itmArray(Self);
+                    itmA.Import(key, (JSONArray) o);
+                } else if (o instanceof String) {
+                    itmSimple itmS = new itmSimple(Self);
+                    itmS.Import(key, (String) o);
+                }
+            } catch (Exception e){
+
+            }
+
+        }
+
+    }
+
     public JSONObject Export(JSONObject jo) {
         for (int iLcv=0; iLcv<View.Client.getComponentCount(); iLcv++){
             Component c=View.Client.getComponent(iLcv);
@@ -95,7 +124,7 @@ public class itmObject extends JPanel {
         State = itmState.isExpanded;
         Kind = itmKind.ikObject;
         setBorder(BorderFactory.createEtchedBorder());
-        Wrapper.add(this, "growx, growy");
+        Wrapper.add(this, "aligny top, gaptop 0, gapleft 0, growx, growy");
         Tools = new itmObjectTools(this, false);
         View = new itmObjectView(this);
         View.Header.setVisible(false);
@@ -109,7 +138,7 @@ public class itmObject extends JPanel {
         Wrapper=owner.Wrapper;
         State = itmState.isExpanded;
         setBorder(BorderFactory.createEtchedBorder());
-        Owner.View.Client.add(this, "gaptop 0, gapleft 0, growx, growy");
+        Owner.View.Client.add(this, "aligny top, gaptop 0, gapleft 0, growx, growy");
         Tools = new itmObjectTools(this,true);
         View = new itmObjectView(this);
         View.Header.lblName.setText(Table.String(Table.JSON.Object));
@@ -121,14 +150,22 @@ public class itmObject extends JPanel {
             View.Header.txtName.setVisible(true);
         }
     }
+    public void Release(){
+        Tools.Release();
+        View.Release();
+        if (Owner==null){
+            Wrapper.remove(Self);
+        } else {
+          Owner.View.Client.remove(Self);
+        }
+    }
     public void Remove(){
-
-        Owner.View.Client.remove(Self);
+        Self.Release();
         Owner.updateHeader(Owner.View.Client.getComponentCount());
         Wrapper.updateUI();
     }
     public void Remove (itmSimple Child){
-        View.Client.remove(Child);
+        Child.Release();
         updateHeader(View.Client.getComponentCount());
         Wrapper.updateUI();
     }

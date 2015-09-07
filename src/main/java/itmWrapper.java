@@ -16,4 +16,8 @@ public class itmWrapper extends JPanel{
         Owner.add(this);
         Owner.setViewportView(this);
     }
+    public void Release(){
+        Owner.remove(this);
+    }
+
 }

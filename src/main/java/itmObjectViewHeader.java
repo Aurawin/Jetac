@@ -22,5 +22,11 @@ public class itmObjectViewHeader extends JPanel{
         add(txtName,"align left, grow, push, height 28");
         txtName.setVisible(false);
     }
+    public void Release(){
+        remove(lblName);
+        remove(txtName);
+        Owner.remove(this);
+        Owner.Header=null;
+    }
 
 }

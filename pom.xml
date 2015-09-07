@@ -40,6 +40,18 @@
             <artifactId>miglayout-core</artifactId>
             <version>5.0</version>
         </dependency>
+        <dependency>
+            <groupId>net.java.dev.laf-widget</groupId>
+            <artifactId>laf-widget</artifactId>
+            <version>5.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.jidesoft</groupId>
+            <artifactId>jide-oss</artifactId>
+            <version>3.6.10</version>
+        </dependency>
+
+
     </dependencies>
     <repositories>
 

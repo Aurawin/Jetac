@@ -28,5 +28,9 @@ public class itmObjectView extends JPanel{
                 break;
         }
     }
-
+    public void Release(){
+        Header.Release();
+        Client.Release();
+        Owner.View=null;
+    }
 }

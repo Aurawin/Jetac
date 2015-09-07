@@ -26,5 +26,24 @@ public class itmObjectViewClient extends JPanel {
         }
 
     }
+    public void Release(){
+        for (int iLcv=0; iLcv<getComponentCount(); iLcv++){
+            Component c=getComponent(iLcv);
+            if (c instanceof itmSimple){
+                itmSimple is = (itmSimple) c;
+                is.Release();
+            } else if (c instanceof itmArray){
+                itmArray ia = (itmArray) c;
+                ia.Release();
+            } else if (c instanceof itmObject){
+                itmObject io = (itmObject)c;
+                io.Release();
+            }
+
+        }
+        Owner.remove(this);
+        Owner.Client=null;
+        Self=null;
+    }
 
 }
