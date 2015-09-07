@@ -7,6 +7,9 @@
     <groupId>com.aurawin</groupId>
     <artifactId>jetac</artifactId>
     <version>Development</version>
+    <properties>
+        <com.aurawin.core.experimental.location>C:/Users/Andrew/Documents/Aurawin/Developer/Java/Core/target/com.aurawin.core-experimental.jar</com.aurawin.core.experimental.location>
+    </properties>
     <dependencies>
         <dependency>
             <groupId>org.json</groupId>
@@ -28,7 +31,7 @@
             <artifactId>core</artifactId>
             <version>experimental</version>
             <scope>system</scope>
-            <systemPath>${AURAWIN_CORE}/target/com.aurawin.core-experimental.jar</systemPath>
+            <systemPath>${com.aurawin.core.experimental.location}</systemPath>
         </dependency>
         <dependency>
             <groupId>com.miglayout</groupId>
