@@ -114,8 +114,6 @@
             <groupId>com.aurawin</groupId>
             <artifactId>core</artifactId>
             <version>experimental</version>
-            <scope>system</scope>
-            <systemPath>${com.aurawin.core.experimental.location}</systemPath>
         </dependency>
         <dependency>
             <groupId>com.miglayout</groupId>
@@ -132,10 +130,12 @@
             <artifactId>jide-oss</artifactId>
             <version>3.6.10</version>
         </dependency>
-
-
     </dependencies>
     <repositories>
-
+        <repository>
+            <id>aurawin</id>
+            <name>aurawin</name>
+            <url>http://au2.aurawin.com:8081/nexus/content/repositories/aurawin</url>
+        </repository>
     </repositories>
 </project>

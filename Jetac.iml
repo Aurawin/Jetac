@@ -41,15 +41,7 @@
     <orderEntry type="library" name="Maven: asm:asm:3.0" level="project" />
     <orderEntry type="library" name="Maven: com.jgoodies:forms:1.1-preview" level="project" />
     <orderEntry type="library" name="Maven: jdom:jdom:1.0" level="project" />
-    <orderEntry type="module-library">
-      <library name="Maven: com.aurawin:core:experimental">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../Core/target/com.aurawin.core-experimental.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
+    <orderEntry type="library" name="Maven: com.aurawin:core:experimental" level="project" />
     <orderEntry type="library" name="Maven: com.miglayout:miglayout-swing:5.0" level="project" />
     <orderEntry type="library" name="Maven: com.miglayout:miglayout-core:5.0" level="project" />
     <orderEntry type="library" name="Maven: com.jidesoft:jide-oss:3.6.10" level="project" />
