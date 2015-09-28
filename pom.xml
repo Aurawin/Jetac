@@ -113,7 +113,7 @@
         <dependency>
             <groupId>com.aurawin</groupId>
             <artifactId>core</artifactId>
-            <version>experimental</version>
+            <version>2015.9.28.1</version>
         </dependency>
         <dependency>
             <groupId>com.miglayout</groupId>
