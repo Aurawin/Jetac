@@ -3,13 +3,21 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
     <groupId>com.aurawin</groupId>
     <artifactId>jetac</artifactId>
     <version>Development</version>
     <properties>
-        <com.aurawin.core.experimental.location>C:/Users/Andrew/Documents/Aurawin/Developer/Java/Core/target/com.aurawin.core-experimental.jar</com.aurawin.core.experimental.location>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+    <repositories>
+        <repository>
+            <id>aurawin</id>
+            <name>aurawin</name>
+            <url>http://au2.aurawin.com:8081/repository/aurawin</url>
+        </repository>
+    </repositories>
     <profiles>
         <profile>
             <id>Development</id>
@@ -141,11 +149,4 @@
             <version>2.6</version>
         </dependency>
     </dependencies>
-    <repositories>
-        <repository>
-            <id>aurawin</id>
-            <name>aurawin</name>
-            <url>http://au2.aurawin.com:8081/repository/aurawin</url>
-        </repository>
-    </repositories>
 </project>
