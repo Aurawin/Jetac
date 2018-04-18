@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Jetac.iml" filepath="$PROJECT_DIR$/Jetac.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jetac.iml" filepath="$PROJECT_DIR$/jetac.iml" />
     </modules>
   </component>
 </project>
