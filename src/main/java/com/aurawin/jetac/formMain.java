@@ -43,8 +43,6 @@ public class formMain {
     JTabbedPane tpPages;
     JPanel sbPosition;
     JPanel sbCaption;
-    JLabel lblCollectionTitle;
-    JLabel lblCollectionName;
     JLabel lblCollectionIndex;
     JLabel lblCollectionTotal;
     JideSplitButton btnFile;
@@ -74,9 +72,14 @@ public class formMain {
 
     public static void main(String[] args) {
         try {
-            UIManager.setLookAndFeel(new SubstanceBusinessLookAndFeel());
+            for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
         } catch (Exception e) {
-            e.printStackTrace();
+
         }
         Loading = true;
         JFrame frame = new JFrame("formMain");
@@ -124,7 +127,7 @@ public class formMain {
                             miFileClose.setEnabled(true);
                             tab.loadFromFile(input);
                             mainForm.tpPages.setTitleAt(mainForm.tpPages.indexOfComponent(tab), tab.Name);
-                            lblCollectionName.setText(tab.Name);
+
                         }
                         break;
                 }
@@ -180,7 +183,7 @@ public class formMain {
                 if (tab != null) {
                     setCollectionPositionStatus(tab.itemIndex, tab.itemTotal);
                     setStatusMessage(tab.Filename);
-                    lblCollectionName.setText(tab.Name);
+
                 } else {
                     setFileMenuOptions(true);
                 }
@@ -195,13 +198,11 @@ public class formMain {
         miFileSaveAs.setEnabled(!Closed);
         setCollectionPositionStatus(0, 0);
         setStatusMessage("");
-        lblCollectionName.setText("");
+
 
     }
 
     private void setFileMenuButton() {
-        btnFile.setMaximumSize(new Dimension(40, 24));
-        btnFile.setPreferredSize(new Dimension(40, 24));
         btnFile.setText(Table.String(Table.Label.File));
         btnFile.setAlwaysDropdown(true);
     }
@@ -253,41 +254,26 @@ public class formMain {
         pnlToolbar = new JPanel();
         pnlToolbar.setLayout(new BorderLayout(0, 0));
         pnlMain.add(pnlToolbar, BorderLayout.NORTH);
+        pnlToolbar.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), null, TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, this.$$$getFont$$$(null, -1, -1, pnlToolbar.getFont()), new Color(-4473925)));
         tbCollection = new JToolBar();
         tbCollection.setFloatable(false);
         pnlToolbar.add(tbCollection, BorderLayout.CENTER);
+        tbCollection.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), null));
         pnlToolbarButtons = new JPanel();
-        pnlToolbarButtons.setLayout(new FlowLayout(FlowLayout.LEFT, 2, 1));
+        pnlToolbarButtons.setLayout(new BorderLayout(0, 4));
         tbCollection.add(pnlToolbarButtons);
         pnlToolbarButtons.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), null));
         btnFile = new JideSplitButton();
-        btnFile.setMaximumSize(new Dimension(50, 22));
-        btnFile.setMinimumSize(new Dimension(50, 22));
-        btnFile.setPreferredSize(new Dimension(50, 22));
-        pnlToolbarButtons.add(btnFile);
-        final Spacer spacer1 = new Spacer();
-        pnlToolbarButtons.add(spacer1);
-        lblCollectionTitle = new JLabel();
-        lblCollectionTitle.setHorizontalAlignment(0);
-        lblCollectionTitle.setHorizontalTextPosition(0);
-        lblCollectionTitle.setText("Collection Editor");
-        pnlToolbarButtons.add(lblCollectionTitle);
-        final Spacer spacer2 = new Spacer();
-        pnlToolbarButtons.add(spacer2);
-        final JLabel label1 = new JLabel();
-        label1.setHorizontalAlignment(0);
-        label1.setHorizontalTextPosition(0);
-        label1.setText("-");
-        pnlToolbarButtons.add(label1);
-        final Spacer spacer3 = new Spacer();
-        pnlToolbarButtons.add(spacer3);
-        lblCollectionName = new JLabel();
-        lblCollectionName.setText("");
-        pnlToolbarButtons.add(lblCollectionName);
+        btnFile.setAlwaysDropdown(false);
+        btnFile.setMaximumSize(new Dimension(75, 24));
+        btnFile.setMinimumSize(new Dimension(78, 24));
+        btnFile.setPopupMenuVisible(false);
+        btnFile.setPreferredSize(new Dimension(75, 24));
+        pnlToolbarButtons.add(btnFile, BorderLayout.WEST);
         sbStatus = new JPanel();
         sbStatus.setLayout(new BorderLayout(0, 0));
         pnlMain.add(sbStatus, BorderLayout.SOUTH);
-        sbStatus.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), null));
+        sbStatus.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), null, TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, this.$$$getFont$$$(null, -1, -1, sbStatus.getFont()), new Color(-4473925)));
         sbPosition = new JPanel();
         sbPosition.setLayout(new GridLayoutManager(1, 2, new Insets(0, 0, 0, 0), -1, -1, true, true));
         sbPosition.setMaximumSize(new Dimension(32767, 25));
@@ -313,6 +299,25 @@ public class formMain {
         tpPages.setMinimumSize(new Dimension(2, 20));
         pnlMain.add(tpPages, BorderLayout.CENTER);
         tpPages.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), null));
+    }
+
+    /**
+     * @noinspection ALL
+     */
+    private Font $$$getFont$$$(String fontName, int style, int size, Font currentFont) {
+        if (currentFont == null) return null;
+        String resultName;
+        if (fontName == null) {
+            resultName = currentFont.getName();
+        } else {
+            Font testFont = new Font(fontName, Font.PLAIN, 10);
+            if (testFont.canDisplay('a') && testFont.canDisplay('1')) {
+                resultName = fontName;
+            } else {
+                resultName = currentFont.getName();
+            }
+        }
+        return new Font(resultName, style >= 0 ? style : currentFont.getStyle(), size >= 0 ? size : currentFont.getSize());
     }
 
     /**
