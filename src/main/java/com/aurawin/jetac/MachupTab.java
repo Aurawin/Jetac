@@ -127,7 +127,7 @@ public class MachupTab {
         pnlSimpleTools.add(btnCollectionEditorAdd, new GridConstraints(0, 4, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         btnCollectionEditorDelete = new JButton();
         btnCollectionEditorDelete.setIcon(new ImageIcon(getClass().getResource("/icons/default/delete_16.png")));
-        btnCollectionEditorDelete.setLabel("");
+        btnCollectionEditorDelete.setText("");
         btnCollectionEditorDelete.setPressedIcon(new ImageIcon(getClass().getResource("/icons/pressed/delete_16.png")));
         btnCollectionEditorDelete.setRolloverEnabled(true);
         btnCollectionEditorDelete.setRolloverIcon(new ImageIcon(getClass().getResource("/icons/rollover/delete_16.png")));

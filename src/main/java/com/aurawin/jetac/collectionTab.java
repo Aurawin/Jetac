@@ -19,6 +19,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONString;
 
+import static com.aurawin.core.file.DialogKind.dkSave;
+
 public class collectionTab extends JPanel {
     public String Filename;
     public String Name;
@@ -68,21 +70,21 @@ public class collectionTab extends JPanel {
             Filename=input.getAbsolutePath();
             Name=input.getName();
         } catch (JSONException e){
-           formMain.mainForm.lblStatus.setText(e.toString());
+           Controller.viewMain.lblStatus.setText(e.toString());
         }
     }
 
     public void saveToFile() {
         if (Filename.isEmpty()){
-            formMain.mainForm.Dialog.setKind(fcKind.fcSave);
-            int ioR=formMain.mainForm.Dialog.showSaveDialog(this);
+            Controller.Dialog.setKind(dkSave);
+            int ioR=Controller.Dialog.showSaveDialog(this);
             switch (ioR){
                 case JFileChooser.APPROVE_OPTION:
-                    File output = formMain.mainForm.Dialog.getSelectedFile();
+                    File output = Controller.Dialog.getSelectedFile();
                     if (!output.exists()){
                         try {
                             if (!output.getName().toLowerCase().endsWith(".json")) {
-                                output = new File(formMain.mainForm.Dialog.getSelectedFile()+".json");
+                                output = new File(Controller.Dialog.getSelectedFile()+".json");
                                 output.createNewFile();
                             }
                             saveToFile(output);
