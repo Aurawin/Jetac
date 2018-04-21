@@ -6,6 +6,7 @@
     <groupId>com.aurawin</groupId>
     <artifactId>jetac</artifactId>
     <version>2018.3.22</version>
+    <name>Jetac</name>
     <properties>
         <maven.compiler.source>1.9</maven.compiler.source>
         <maven.compiler.target>1.9</maven.compiler.target>
@@ -20,9 +21,8 @@
     </repositories>
     <profiles>
         <profile>
-            <id>Development</id>
+            <id>Default</id>
             <build>
-                <finalName>com.aurawin.jetac</finalName>
                 <resources>
                     <resource>
                         <directory>${basedir}/src/main/resources/</directory>
@@ -35,29 +35,14 @@
                         <artifactId>maven-compiler-plugin</artifactId>
                         <version>3.3</version>
                         <configuration>
-                            <source>1.9</source>
-                            <target>1.9</target>
+                            <source>1.8</source>
+                            <target>1.8</target>
                             <showDeprecation>true</showDeprecation>
                             <showWarnings>true</showWarnings>
                             <fork>true</fork>
                         </configuration>
                     </plugin>
                     <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-jar-plugin</artifactId>
-                        <version>2.6</version>
-                        <configuration>
-                            <archive>
-                                <manifest>
-                                    <addClasspath>true</addClasspath>
-                                    <mainClass>formMain</mainClass>
-                                </manifest>
-                                <manifestFile>${basedir}/src/main/java/META-INF/MANIFEST.MF</manifestFile>
-                            </archive>
-                        </configuration>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-assembly-plugin</artifactId>
                         <executions>
                             <execution>
@@ -70,12 +55,40 @@
                         <configuration>
                             <archive>
                                 <manifest>
-                                    <mainClass>com.aurawin.jetac.formMain</mainClass>
+                                    <addClasspath>true</addClasspath>
+                                    <mainClass>com.aurawin.jetac.Controller</mainClass>
                                 </manifest>
                             </archive>
                             <descriptorRefs>
                                 <descriptorRef>jar-with-dependencies</descriptorRef>
                             </descriptorRefs>
+                            <finalName>Jetac</finalName>
+                            <appendAssemblyId>false</appendAssemblyId>
+                        </configuration>
+                    </plugin>
+
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-jar-plugin</artifactId>
+                        <version>2.4</version>
+                        <configuration>
+                            <finalName>Jetac</finalName>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>ideauidesigner-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>javac2</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <fork>true</fork>
+                            <debug>true</debug>
+                            <failOnError>true</failOnError>
                         </configuration>
                     </plugin>
                 </plugins>

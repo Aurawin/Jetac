@@ -11,7 +11,7 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="Jetac" target="1.9" />
-      <module name="jetac" target="1.9" />
+      <module name="jetac" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

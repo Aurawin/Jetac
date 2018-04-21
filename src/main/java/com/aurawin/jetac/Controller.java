@@ -53,11 +53,15 @@ public class Controller {
         frameView = new JFrame("View");
         viewMain = new View();
         frameView.setContentPane(viewMain.Viewer);
+
         frameView.setPreferredSize(new Dimension(640, 480));
         frameView.setTitle("Aurawin Jetac");
         frameView.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frameView.pack();
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        frameView.setLocation(dim.width/2-frameView.getSize().width/2, dim.height/2-frameView.getSize().height/2);
         frameView.setVisible(true);
+
 
         viewMain.setButtonCaptions();
 

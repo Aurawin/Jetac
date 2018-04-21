@@ -22,7 +22,6 @@ public class View {
     public JPanel Viewer;
     public JPanel pnlMain;
     public JPanel sbStatus;
-    public JPanel sbPosition;
     public JLabel lblCollectionIndex;
     public JLabel lblCollectionTotal;
     public JPanel sbCaption;
@@ -37,13 +36,8 @@ public class View {
     private JButton btnOpen;
 
     public View() {
+
         createUIComponents();
-
-    }
-
-    public void setCollectionPositionStatus(int current, int total) {
-        lblCollectionIndex.setText(Table.Print(current));
-        lblCollectionTotal.setText(Table.Print(total));
     }
 
     public static void setStatusMessage(String Status) {
@@ -61,9 +55,10 @@ public class View {
                     case JFileChooser.APPROVE_OPTION:
                         File input = Controller.Dialog.getSelectedFile();
                         if (input.exists()) {
-                            collectionTab tab = new collectionTab(tpPages);
-                            tab.loadFromFile(input);
-                            tpPages.setTitleAt(tpPages.indexOfComponent(tab), tab.Name);
+                            collectionTab ct = new collectionTab(tpPages);
+                            ct.loadFromFile(input);
+                            tpPages.setTitleAt(tpPages.indexOfComponent(ct), ct.Name);
+                            setStatusMessage(ct.Filename);
                         }
                         break;
                 }
@@ -72,7 +67,8 @@ public class View {
         btnNew.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                collectionTab tab = new collectionTab(tpPages);
+                collectionTab ct = new collectionTab(tpPages);
+                setStatusMessage(ct.Filename);
             }
         });
         btnSave.addActionListener(new ActionListener() {
@@ -80,6 +76,7 @@ public class View {
             public void actionPerformed(ActionEvent e) {
                 collectionTab ct = (tpPages.getSelectedIndex() > -1) ? (collectionTab) tpPages.getComponentAt(tpPages.getSelectedIndex()) : null;
                 if (ct!=null) ct.saveToFile();
+                setStatusMessage(ct.Filename);
             }
         });
         btnSaveAs.addActionListener(new ActionListener() {
@@ -87,15 +84,15 @@ public class View {
             public void actionPerformed(ActionEvent e) {
                 collectionTab ct = (tpPages.getSelectedIndex() > -1) ? (collectionTab) tpPages.getComponentAt(tpPages.getSelectedIndex()) : null;
                 if (ct!=null) ct.saveToFile();
+                setStatusMessage(ct.Filename);
+
             }
         });
         tpPages.addChangeListener(new ChangeListener() {
             public void stateChanged(ChangeEvent e) {
                 collectionTab tab = (tpPages.getSelectedIndex() > -1) ? (collectionTab) tpPages.getComponentAt(tpPages.getSelectedIndex()) : null;
                 if (tab != null) {
-                    setCollectionPositionStatus(tab.itemIndex, tab.itemTotal);
                     setStatusMessage(tab.Filename);
-
                 }
 
             }
@@ -118,5 +115,8 @@ public class View {
         btnSave.setText(Controller.captionSave);
         btnSaveAs.setText(Controller.captionSaveAs);
         btnOpen.setText(Controller.captionOpen);
+    }
+    public JComponent $$$getRootComponent$$$() {
+        return pnlMain;
     }
 }
