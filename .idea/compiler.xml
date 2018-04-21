@@ -9,8 +9,7 @@
         <module name="jetac" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="Jetac" target="1.9" />
+    <bytecodeTargetLevel target="10">
       <module name="jetac" target="1.8" />
     </bytecodeTargetLevel>
   </component>
