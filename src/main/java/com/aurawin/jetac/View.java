@@ -83,7 +83,7 @@ public class View {
             @Override
             public void actionPerformed(ActionEvent e) {
                 collectionTab ct = (tpPages.getSelectedIndex() > -1) ? (collectionTab) tpPages.getComponentAt(tpPages.getSelectedIndex()) : null;
-                if (ct!=null) ct.saveToFile();
+                if (ct!=null) ct.saveToFileAs();
                 setStatusMessage(ct.Filename);
 
             }

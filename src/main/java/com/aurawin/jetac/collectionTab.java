@@ -73,7 +73,30 @@ public class collectionTab extends JPanel {
            Controller.viewMain.lblStatus.setText(e.toString());
         }
     }
+    public void saveToFileAs() {
+        Controller.Dialog.setKind(dkSave);
+        int ioR=Controller.Dialog.showSaveDialog(this);
+        switch (ioR){
+            case JFileChooser.APPROVE_OPTION:
+                File output = Controller.Dialog.getSelectedFile();
+                if (!output.exists()){
+                    try {
+                        String sEnding=output.getName().toLowerCase();
+                        if (!sEnding.endsWith(".json")) {
+                            output = new File(Controller.Dialog.getSelectedFile()+".json");
+                            output.createNewFile();
+                        }
+                        saveToFile(output);
+                    }catch (Exception e){
+                        output = null;
+                    }
 
+                } else {
+                    saveToFile(output);
+                }
+                break;
+        }
+    }
     public void saveToFile() {
         if (Filename.isEmpty()){
             Controller.Dialog.setKind(dkSave);
@@ -103,8 +126,10 @@ public class collectionTab extends JPanel {
         }
     }
     public void saveToFile(String fileName){
+        Controller.viewMain.lblStatus.setText(fileName);
         File output = new File(fileName);
         saveToFile(output);
+
     }
     public collectionTab(JTabbedPane aOwner) {
         super(new BorderLayout());
