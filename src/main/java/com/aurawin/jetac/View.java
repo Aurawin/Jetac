@@ -110,12 +110,7 @@ public class View {
         btnDisplay.setText(Controller.DisplayText[(value)? 0:1]);
     }
 
-    public void setButtonCaptions(){
-        btnNew.setText(Controller.captionNew);
-        btnSave.setText(Controller.captionSave);
-        btnSaveAs.setText(Controller.captionSaveAs);
-        btnOpen.setText(Controller.captionOpen);
-    }
+
     public JComponent $$$getRootComponent$$$() {
         return pnlMain;
     }

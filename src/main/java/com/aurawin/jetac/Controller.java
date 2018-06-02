@@ -63,9 +63,6 @@ public class Controller {
         frameView.setVisible(true);
 
 
-        viewMain.setButtonCaptions();
-
-
         Loading = false;
     }
 

@@ -11,6 +11,7 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Maven: com.aurawin:core:2018.5.12.2" level="project" />
+    <orderEntry type="library" name="Maven: com.aurawin:core:2018.6.1.1" level="project" />
     <orderEntry type="library" name="Maven: junit:junit:4.8.1" level="project" />
     <orderEntry type="library" name="Maven: org.postgresql:postgresql:9.4-1202-jdbc42" level="project" />
     <orderEntry type="library" name="Maven: org.firebirdsql.jdbc:jaybird-jdk18:2.2.8" level="project" />

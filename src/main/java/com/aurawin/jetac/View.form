@@ -81,6 +81,7 @@
                       <focusPainted value="true"/>
                       <font size="26"/>
                       <horizontalTextPosition value="0"/>
+                      <icon value="icons/SaveAs.png"/>
                       <iconTextGap value="0"/>
                       <margin top="0" left="0" bottom="0" right="0"/>
                       <maximumSize width="40" height="40"/>
@@ -89,31 +90,6 @@
                       <selected value="true"/>
                       <text value=""/>
                       <toolTipText value="Save current document as..."/>
-                      <verifyInputWhenFocusTarget value="true"/>
-                    </properties>
-                  </component>
-                  <component id="178e0" class="javax.swing.JButton" binding="btnNew">
-                    <constraints>
-                      <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
-                        <minimum-size width="50" height="40"/>
-                        <preferred-size width="50" height="40"/>
-                        <maximum-size width="50" height="40"/>
-                      </grid>
-                    </constraints>
-                    <properties>
-                      <alignmentX value="0.5"/>
-                      <borderPainted value="true"/>
-                      <contentAreaFilled value="true"/>
-                      <focusPainted value="true"/>
-                      <font size="26"/>
-                      <horizontalTextPosition value="0"/>
-                      <iconTextGap value="0"/>
-                      <margin top="0" left="0" bottom="0" right="0"/>
-                      <maximumSize width="40" height="40"/>
-                      <minimumSize width="40" height="40"/>
-                      <name value="btnNew"/>
-                      <text value=""/>
-                      <toolTipText value="Create a new document..."/>
                       <verifyInputWhenFocusTarget value="true"/>
                     </properties>
                   </component>
@@ -132,6 +108,7 @@
                       <focusPainted value="true"/>
                       <font size="26"/>
                       <horizontalTextPosition value="0"/>
+                      <icon value="icons/Save.png"/>
                       <iconTextGap value="0"/>
                       <margin top="0" left="0" bottom="0" right="0"/>
                       <maximumSize width="40" height="40"/>
@@ -144,7 +121,7 @@
                   </component>
                   <component id="8b7a" class="javax.swing.JButton" binding="btnOpen">
                     <constraints>
-                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                      <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
                         <minimum-size width="50" height="40"/>
                         <preferred-size width="50" height="40"/>
                         <maximum-size width="50" height="40"/>
@@ -158,6 +135,7 @@
                       <focusPainted value="true"/>
                       <font size="26"/>
                       <horizontalTextPosition value="0"/>
+                      <icon value="icons/Open.png"/>
                       <iconTextGap value="0"/>
                       <margin top="0" left="0" bottom="0" right="0"/>
                       <maximumSize width="40" height="40"/>
@@ -166,6 +144,32 @@
                       <selected value="true"/>
                       <text value=""/>
                       <toolTipText value="Open an existing document..."/>
+                      <verifyInputWhenFocusTarget value="true"/>
+                    </properties>
+                  </component>
+                  <component id="178e0" class="javax.swing.JButton" binding="btnNew">
+                    <constraints>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                        <minimum-size width="50" height="40"/>
+                        <preferred-size width="50" height="40"/>
+                        <maximum-size width="50" height="40"/>
+                      </grid>
+                    </constraints>
+                    <properties>
+                      <alignmentX value="0.5"/>
+                      <borderPainted value="true"/>
+                      <contentAreaFilled value="true"/>
+                      <focusPainted value="true"/>
+                      <font size="26"/>
+                      <horizontalTextPosition value="0"/>
+                      <icon value="icons/New.png"/>
+                      <iconTextGap value="0"/>
+                      <margin top="0" left="0" bottom="0" right="0"/>
+                      <maximumSize width="40" height="40"/>
+                      <minimumSize width="40" height="40"/>
+                      <name value="btnNew"/>
+                      <text value=""/>
+                      <toolTipText value="Create a new document..."/>
                       <verifyInputWhenFocusTarget value="true"/>
                     </properties>
                   </component>
